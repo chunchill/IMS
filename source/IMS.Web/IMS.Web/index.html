@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>IMS</title>
+    <link href="css/jquery.mobile-1.3.2.css" rel="stylesheet" />
+    <link href="css/jquery.mobile.theme-1.3.2.css" rel="stylesheet" />
+    <link href="css/jquery.mobile.structure-1.3.2.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <script src="scripts/lib/jquery-1.8.2.js"></script>
+    <!--<script src="scripts/app/knockout.jquery.mobile.js"></script>-->
+    <script src="scripts/lib/jquery.mobile-1.3.2.js"></script>
+    <script src="scripts/lib/knockout-2.2.0.js"></script>
+    <script src="scripts/lib/knockout.mapping-latest.js"></script>
+    <script src="scripts/app/mock/data.js"></script>
+    <script src="scripts/app/viewmodel/MyReservationViewModel.js"></script>
+    <script src="scripts/app/viewmodel/ReservationDetailViewModel.js"></script>
+    <script src="scripts/app/app.js"></script>
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <!-- ### A page that renders the myReservationViewModel -->
+    <div data-role="page" id="myReservationView">
+        <div data-role="content">
+            <p align="center"><a href="#"><img src="images/pathpoint.png" height="100" /></a></p>
+            <p align="center">
+                <font size="1" color="gray">道口预约管理</font>
+                <br />
+                <b>我的预约</b>
+            </p>
+            <div data-role="collapsible" data-theme="b" data-content-theme="c">
+                <h2>已计划: <font color="yellow"><span data-bind="text:planedItems().length"></span></font></h2>
+                <ul data-role="listview" data-inset="true" data-count-theme="e" data-filter="true" data-bind="jqmTemplate: {name:'orderHeader', foreach:planedItems}">
+                </ul>
+            </div>
+            <div data-role="collapsible" data-theme="e" data-content-theme="c">
+                <h2>执行中: <font color="gray"><span data-bind="text:unPlanedItems().length"></span></font></h2>
+                <ul data-role="listview" data-inset="true" data-count-theme="b" data-filter="true" data-bind="jqmTemplate: {name:'orderHeader', foreach:unPlanedItems}">
+                </ul>
+            </div>
+        </div>
+        <script type="text/html" id="orderHeader">
+            <li>
+                <a data-bind="click:$parent.itemClicked"> <h2><span data-bind="text:id"></span></h2> <p><strong data-bind="text:date"></strong></p> <span data-bind="text:time"></span> <span class="ui-li-count" data-bind="text:count"></span></a>
+            </li>
+        </script>
+        <!-- /content -->
+        <div data-role="content">
+            <p align="center"> <a href="#defaultpanel" data-rel="popup" class="ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">go</a></p>
+        </div>
+        <!-- /content -->
+        <!-- defaultpanel  -->
+        <div data-role="panel" id="defaultpanel" data-theme="a" data-display="overlay" data-position="right">
+            <div class="panel-content">
+                <p align="center">我的<font color="orange"><b>iTMS</b></font> <br /><font size="1" font="" color="gray">道口预约</font></p>
+                <ul data-role="listview" data-inset="true" class="ui-icon-alt">
+                    <li data-icon="plus"><a href="itms_dock_newapp_cn.html" rel="external">创建预约</a></li>
+                    <li data-icon="edit"><a href="#">编辑预约</a></li>
+                    <li data-icon="check"><a href="itms_dock_excapp_cn.html" rel="external">执行预约</a></li>
+                    <li data-icon="search"><a href="itms_dock_myapp_cn.html" rel="external">我的预约</a></li>
+                    <li data-icon="star"><a href="#">我的档案</a></li>
+                </ul>
+                <br />
+                <br />
+                <p align="center"><a href="#" data-rel="close" class="ui-icon-nodisc" data-role="button" data-icon="grid" data-iconshadow="false" data-iconpos="notext" data-theme="a">Close</a></p>
+            </div>
+            <!-- /content wrapper for padding -->
+        </div>
+        <!-- /defaultpanel -->
+        <div data-role="content">
+            <p align="center"><a href="#"><img class="popphoto" src="images/footico.png" height="30px" /></a><br /> <font size="1" font="" color="orange">i</font><font size="1" font="" color="#66B3FF">SCM</font><font size="1">: iTMS</font></p>
+        </div>
+        <!-- /content -->
+    </div>
+    <!-- /page myReservationViewModel -->
+
+    <!-- ### A page that renders the reservationDetailViewModel -->
+    <div data-role="page" id="reservationDetailView">
+        <div data-role="content">
+            <p align="center"><a href="#"><img src="images/pathpoint.png" height="100" /></a></p>
+            <p align="center"><font size="1" color="gray">道口预约</font><br /> <b>预约明细</b></p>
+            <form>
+                <div style="padding:10px 20px;">
+                    <p align="center">
+                    <a href="#popqrcode" data-rel="popup" data-position-to="window" data-transition="fade">
+                        <font size="4" color="gray"><strong data-bind="text:orderItemID"></strong></font></a></p>
+                    <div data-role="popup" id="popqrcode" data-overlay-theme="a" data-theme="d" data-corners="false">
+                        <a href="#popqrcode" data-rel="popup" data-position-to="window" data-transition="fade"> </a>
+                        <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                        <img src="http://chart.apis.google.com/chart?cht=qr&amp;chs=320x320&amp;chl=20131115AB01&amp;choe=UTF-8&amp;chld=L" />
+                    </div>
+                    <p></p>
+                    <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true">
+                        <legend>基本信息</legend>
+                        <div data-role="fieldcontain" data-bind="with:basicInformation">
+                            <label for="txdr">司机:</label>
+                            <input type="text" name="txdr" id="txdr" data-bind="value:driver" disabled="disabled" data-mini="true" />
+                            <label for="txmb">手机:</label>
+                            <input type="text" name="txmb" id="txmb" data-bind="value:phone" disabled="disabled" data-mini="true" />
+                            <label for="txlc">车牌号:</label>
+                            <input type="text" name="txlc" id="txlc" data-bind="value:carNumber" disabled="disabled" data-mini="true" />
+                            <label for="txlc">车辆类型:</label>
+                            <input type="text" name="txvt" id="txvt" data-bind="value:carType" disabled="disabled" data-mini="true" />
+                            <label for="dt">到达日期:</label>
+                            <input type="date" name="dt" id="dt" data-bind="value:arrivalDate" placeholder="Date" disabled="disabled" data-mini="true" />
+                            <label for="te">最早时间:</label>
+                            <input type="time" name="te" id="te" data-bind="value:earliestTime" placeholder="Time" disabled="disabled" data-mini="true" />
+                            <label for="te">最晚时间:</label>
+                            <input type="time" name="te" id="te" data-bind="value:latestTime" placeholder="Time" disabled="disabled" data-mini="true" />
+                        </div>
+                    </fieldset>
+                    <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="c">
+                        <h4>交货单: <font color="yellow"><span data-bind="text:deliveryOrders().length"></span></font></h4>
+                        <ul data-role="listview" data-bind="jqmTemplate:{name:'deliverOrderItem',foreach:deliveryOrders}">
+                        </ul>
+                    </div>
+                    <p align="center"> <font color="gray" size="1"><span data-bind="text:status"></span></font><br /> <a href="#popuptimeline" data-role="button" class="ui-icon-alt" data-rel="popup" data-transition="slideup" data-icon="alert" data-iconpos="notext" data-theme="c" data-inline="true">Arrow down</a> </p>
+                </div>
+
+                <script type="text/html" id="deliverOrderItem">
+                    <li data-icon="check"><a href="#"><span data-bind="text:orderNumber"></span></a></li>
+                </script>
+            </form>
+            <form>
+                <div style="padding:10px 20px;">
+                    <p align="center"><a href="#popupMap" data-rel="popup" data-position-to="window"><img class="popphoto" src="http://www.flaticon.com/png/256/16199.png" height="30px" /></a><br /> </p>
+                    <div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="b" data-corners="false" data-tolerance="15,15">
+                        <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                        <iframe src="map.html" width="320" height="320" seamless=""></iframe>
+                    </div>
+                </div>
+            </form>
+            <div data-role="content">
+                <p align="center"> <a href="#defaultpanel" data-rel="popup" class="ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">go</a></p>
+            </div>
+            <!-- /content -->
+            <div data-role="popup" id="popuptimeline" data-theme="d" data-overlay-theme="c">
+                <ul data-role="listview" data-inset="true" style="min-width:240px;" data-theme="d">
+                    <li data-role="divider" data-theme="a">时间轴</li>
+                    <li data-icon="check"><a href="#"> <h3>在途</h3> <p class="ui-li-aside"><font size="1" color="gray">2013-11-11</font><br /><strong>6:24 </strong>am</p> </a></li>
+                    <li data-icon="delete"><a href="#"> <h3>到达</h3> <p class="ui-li-aside"><font size="1" color="gray">2013-11-11</font><br /><strong>11:24 </strong>pm</p> </a></li>
+                    <li data-icon="delete"><a href="#"> <h3>道口分配</h3> <p class="ui-li-aside"><font size="1" color="gray">2013-11-11</font><br /><strong>11:24 </strong>pm<br /> <font size="1" color="gray">Dock: A4</font></p> </a></li>
+                    <li data-icon="delete"><a href="#"> <h3>进场卸货</h3> <p class="ui-li-aside"><font size="1" color="gray">2013-11-11</font><br /><strong>13:24 </strong>pm</p> </a></li>
+                    <li data-icon="delete"><a href="#"> <h3>完成出场</h3> <p class="ui-li-aside"><font size="1" color="gray">2013-11-11</font><br /><strong>14:24 </strong>pm</p> </a></li>
+                </ul>
+            </div>
+            <!-- defaultpanel  -->
+            <div data-role="panel" id="defaultpanel" data-theme="a" data-display="overlay" data-position="right">
+                <div class="panel-content">
+                    <p align="center">我的<font color="orange"><b>iTMS</b></font> <br /><font size="1" font="" color="gray">道口预约</font></p>
+                    <ul data-role="listview" data-inset="true" class="ui-icon-alt">
+                        <li data-icon="plus"><a href="itms_dock_newapp_cn.html" rel="external">创建预约</a></li>
+                        <li data-icon="edit"><a href="#">编辑预约</a></li>
+                        <li data-icon="check"><a href="itms_dock_excapp_cn.html" rel="external">执行预约</a></li>
+                        <li data-icon="search"><a href="itms_dock_myapp_cn.html" rel="external">我的预约</a></li>
+                        <li data-icon="star"><a href="#">我的档案</a></li>
+                    </ul>
+                    <br />
+                    <br />
+                    <p align="center"><a href="#" data-rel="close" class="ui-icon-nodisc" data-role="button" data-icon="grid" data-iconshadow="false" data-iconpos="notext" data-theme="a">Close</a></p>
+                </div>
+                <!-- /content wrapper for padding -->
+            </div>
+            <!-- /defaultpanel -->
+            <div data-role="content">
+                <p align="center"><a href="#"><img class="popphoto" src="http://www.flaticon.com/png/256/247.png" height="30px" /></a><br /> <font size="1" font="" color="orange">i</font><font size="1" font="" color="#66B3FF">SCM</font><font size="1">: iTMS</font></p>
+            </div>
+            <!-- /content -->
+        </div>
+    </div>
+    <!-- /page -->
+</body>
+</html>
