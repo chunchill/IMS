@@ -6,7 +6,7 @@
         self.orderItemID = ko.observable();
         self.status = ko.observable();
         self.deliveryOrders = ko.observableArray();
-        self.basicInformation = {
+        self.basicInformation ={
             driver: ko.observable(),
             phone: ko.observable(),
             carNumber: ko.observable(),
@@ -16,7 +16,7 @@
             latestTime: ko.observable(),
         };
         self.init = function (orderItem) {
-            self.basicInformation = ko.mapping.fromJS(IMS.mockData.mockedDetailOrder.basicInformation);
+            ko.mapping.fromJS(IMS.mockData.mockedDetailOrder.basicInformation, {}, self.basicInformation);
             self.orderItemID(IMS.mockData.mockedDetailOrder.orderItemID);
             self.deliveryOrders(IMS.mockData.mockedDetailOrder.deliveryOrders);
             self.status(IMS.mockData.mockedDetailOrder.status);
