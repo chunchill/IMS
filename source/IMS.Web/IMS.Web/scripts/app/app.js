@@ -12,7 +12,7 @@ ko.bindingHandlers.jqmTemplate = {
     }
 };
 
-
+infuser.defaults.templateUrl = "templates";
 
 // create the various view models
 var myreservationModel = new IMS.MyReservationViewModel();

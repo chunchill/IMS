@@ -92,6 +92,8 @@ $(document)
                              * we need to do it the old fashion way.
                              */
                             widget.trigger('create');
+                            if(widgetRole==='collapsible')
+                                widget.collapsible();
                         }
 
                     }
