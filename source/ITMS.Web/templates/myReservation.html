@@ -1,16 +1,16 @@
-﻿<div data-role="content">
+﻿
     <p align="center"><a href="#"><img src="images/pathpoint.png" height="100" /></a></p>
     <p align="center">
         <font size="1" color="gray">道口预约管理</font>
         <br />
         <b>我的预约</b>
     </p>
-    <div data-role="collapsible" data-theme="b" data-content-theme="c">
+    <div data-role="collapsible" data-theme="d" data-content-theme="d" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="padding:10px 20px;">
         <h2>已计划: <font color="yellow"><span data-bind="text:planedItems().length"></span></font></h2>
-        <ul data-role="listview" data-inset="true" data-count-theme="e" data-filter="true" data-bind="jqmTemplate: {name:'orderHeader', foreach:planedItems}"></ul>
+        <ul data-role="listview" data-inset="true" data-count-theme="e" data-filter="true" data-mini="ture" data-bind="jqmTemplate: {name:'orderHeader', foreach:planedItems},jqmRefreshList:planedItems"></ul>
     </div>
-    <div data-role="collapsible" data-theme="e" data-content-theme="c">
+    <div data-role="collapsible" data-theme="d" data-content-theme="d" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="padding:10px 20px;">
         <h2>执行中: <font color="gray"><span data-bind="text:unPlanedItems().length"></span></font></h2>
-        <ul data-role="listview" data-inset="true" data-count-theme="b" data-filter="true" data-bind="jqmTemplate: {name:'orderHeader', foreach:unPlanedItems}"></ul>
+        <ul data-role="listview" data-inset="true" data-count-theme="b" data-filter="true" data-mini="ture" data-bind="jqmTemplate: {name:'orderHeader', foreach:unPlanedItems},jqmRefreshList:unPlanedItems "></ul>
     </div>
-</div>
+

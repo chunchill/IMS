@@ -6,15 +6,35 @@
         self.planedItems = ko.observableArray();
         self.unPlanedItems = ko.observableArray();
 
-        self.planedItems(IMS.mockData.mockedReservation.planedItems);
-        self.unPlanedItems(IMS.mockData.mockedReservation.unPlanedItems);
+        function addStatus(items, status) {
+            items.forEach(function (item) {
+                item.status = status;
+            });
+        }
 
         //--public functions
         self.itemClicked = function (orderItem) {
-            //alert(JSON.stringify(orderItem));
             reservationDetailModel.init(orderItem);
             $.mobile.changePage("#reservationDetailView");
         };
+
+        self.init = function (mobile) {
+            var option = { mobile: mobile, status: '0' };
+            IMS.datacontext.appointment.getAppointmentByMobile(option).then(function (result) {
+                if (result.errorMessage !== 'NO_DATA') {
+                    addStatus(result, false);
+                    self.planedItems(result)
+                }
+               
+            });
+            option = { mobile: mobile, status: '1' };
+            IMS.datacontext.appointment.getAppointmentByMobile(option).then(function (result) {
+                if (result.errorMessage !== 'NO_DATA') {
+                    addStatus(result, true);
+                    self.unPlanedItems(result);
+                }
+            });
+        }
     }
     return IMS.MyReservationViewModel;
 })(window.IMS = window.IMS || {}, jQuery);

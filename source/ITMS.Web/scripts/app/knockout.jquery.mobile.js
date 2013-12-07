@@ -80,21 +80,27 @@ $(document)
                          * is, so we can figure out if it can be
                          * refreshed or not.
                          */
-                        var widgetRole = widget.jqmData('role').replace('-', ''),
-                                widgetInstance = widget.jqmData(widgetRole),
-                                widgetIsRefreshable = widgetInstance && $.isFunction(widgetInstance['refresh']);
+                        try {
+                            var widgetRole = widget.jqmData('role').replace('-', ''),
+                                 widgetInstance = widget.jqmData(widgetRole),
+                                 widgetIsRefreshable = widgetInstance && $.isFunction(widgetInstance['refresh']);
 
-                        if (widgetIsRefreshable) {
-                            widgetInstance['refresh']();
-                        } else {
-                            /*
-                             * if a widget isn't refreshable
-                             * we need to do it the old fashion way.
-                             */
-                            widget.trigger('create');
-                            if(widgetRole==='collapsible')
-                                widget.collapsible();
+                            if (widgetIsRefreshable) {
+                                widgetInstance['refresh']();
+                            } else {
+                                /*
+                                 * if a widget isn't refreshable
+                                 * we need to do it the old fashion way.
+                                 */
+                                widget.trigger('create');
+                                if (widgetRole === 'collapsible')
+                                    widget.collapsible();
+                            }
+                        } catch (e) {
+                            
                         }
+
+                        
 
                     }
 
