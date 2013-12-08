@@ -22,7 +22,7 @@
             var option = { mobile: mobile, status: '0' };
             IMS.datacontext.appointment.getAppointmentByMobile(option).then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
-                    addStatus(result, false);
+                    addStatus(result, true);
                     self.planedItems(result)
                 }
                
@@ -30,7 +30,7 @@
             option = { mobile: mobile, status: '1' };
             IMS.datacontext.appointment.getAppointmentByMobile(option).then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
-                    addStatus(result, true);
+                    addStatus(result, false);
                     self.unPlanedItems(result);
                 }
             });

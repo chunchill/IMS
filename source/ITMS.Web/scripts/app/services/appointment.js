@@ -3,7 +3,7 @@ IMS.datacontext = {
   
 };
 IMS.datacontext.appointment = (function ($, amplify) {
-    var serverUrl = 'http://211.144.85.15:8080/blade/rest/';
+    var serverUrl = 'http://211.144.85.15:8080/blade/rest';
     var init = function () {
         amplify.request.define('getAppointmentByMobile', 'ajax', {
             url: serverUrl + '/application/getAppBriefListM.jsonp?mobile={mobile}&status={status}',
@@ -26,6 +26,14 @@ IMS.datacontext.appointment = (function ($, amplify) {
         amplify.request.define('execApp', 'ajax', {
             url: serverUrl + '/application/execApp',
             type: 'POST'
+        });
+
+        amplify.request.define('newApp', 'ajax', {
+            type: 'POST',
+            //headers:{'origin':'*'},
+            url: serverUrl + '/application/newApp',
+            crossDomain: true
+
         });
     },
 
@@ -56,13 +64,18 @@ IMS.datacontext.appointment = (function ($, amplify) {
         return defferedRequest('execApp', option)
     };
 
+    createNewAppointment = function (option) {
+        return defferedRequest('newApp', option)
+    };
+
     init();
 
     return {
         getAppointmentByMobile: getAppointmentByMobile,
         getAppointmentHead: getAppointmentHead,
         getAppointmentDeliveryItems: getAppointmentDeliveryItems,
-        excuteAppointment: excuteAppointment
+        excuteAppointment: excuteAppointment,
+        createNewAppointment: createNewAppointment
     }
 }(jQuery, amplify));
 
