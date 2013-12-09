@@ -12,8 +12,7 @@ asyncTest("getAppointmentByMobile",1, function () {
 
 
 //Test API: newApp
-asyncTest("createNewAppointment", 1, function () {
-    stop();
+asyncTest("createNewAppointment", 1,function () {
     var option = {
         key: 'key0001',
         driver: 'jim',
@@ -26,10 +25,13 @@ asyncTest("createNewAppointment", 1, function () {
         pLTime: '2013-12-12  13:00:00',
         deliveryNoteId: ['20000', '20001']
     };
-    IMS.datacontext.appointment.createNewAppointment(option).then(function (result) {
-        if (result.errorMessage !== '') {
-            ok(result.errorMessage !== '', "successfully create one record by using newApp API!")
-            start();
-        }
-    });
+    setTimeout(function () {
+        IMS.datacontext.appointment.createNewAppointment(option).then(function (result) {
+            if (result.errorMessage !== '') {
+                ok(result.errorMessage !== '', "successfully create one record by using newApp API!");
+                start();
+            }
+        });
+    }, 1000);
+  
 });
