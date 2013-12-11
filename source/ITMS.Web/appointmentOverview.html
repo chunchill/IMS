@@ -1,0 +1,243 @@
+﻿
+<!doctype html>
+<html>
+<head>
+    <title>道口管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=GBK" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
+    <style>
+        .panel-content {
+            padding: 15px;
+        }
+    </style>
+
+</head>
+<body>
+    <div data-role="page" id="page1" data-theme="b">
+        <div data-role="header" data-position="fixed" data-theme="c">
+            <h1><font size="3">道口管理</font></h1>
+            <a href="#defaultpanel" data-rel="popup" data-icon="grid" data-theme="c"><font size="1">控制面板</font></a>
+            <a href="#defaultpanel" data-rel="popup" data-icon="arrow-r" data-theme="c"><font size="1">iTMS</font></a>
+        </div>
+
+        <p align="center">
+            <a href="#"><img class="popphoto" src="http://www.flaticon.com/png/256/15593.png" height="30px"></a><br>
+            <font size="2" color="gray"><b>今日预约</b></font><br>
+            <font size="1" color="gray">清单看板</font>
+        </p>
+
+        <div data-role="collapsible" data-collapsed="false" class="ui-icon-alt" data-theme="e" data-content-theme="b" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="padding:10px 20px;">
+            <h2>今日预约清单</h2>
+
+            <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-count-theme="b">
+                <li>
+                    <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                        <img src="http://www.flaticon.com/png/256/3497.png">
+                        <h2>预约: A1217V213 | 供应商: Tesso</h2>
+                        <p>车型: 飞翼 | 车牌: 苏EA7011 | 货量: 140M3 | 计划到达: 10:00-10:30</p>
+                        <p class="ui-li-aside"><strong>状态:</strong>到达<br><strong>预计:</strong>--</p>
+                        <span class="ui-li-count">D4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                        <img src="http://www.flaticon.com/png/256/2757.png">
+                        <h2>预约: A1217V219 | 供应商: Tesso</h2>
+                        <p>车型: 飞翼 | 车牌: 浙AY92925 | 货量: 140M3 | 计划到达: 09:00-10:00</p>
+                        <p class="ui-li-aside"><strong>状态:</strong>作业<br><strong>预计:</strong>--</p>
+                        <span class="ui-li-count">D2</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                        <img src="http://www.flaticon.com/png/256/18398.png">
+                        <h2>预约: A1217V020 | 供应商: Tesso</h2>
+                        <p>车型: 飞翼 | 车牌: 沪A81122 | 货量: 140M3 | 计划到达: 09:00-09:45</p>
+                        <p class="ui-li-aside"><strong>状态:</strong>在途<br><strong>预计:</strong><font color="red"><b>延误</b></font></p>
+                        <span class="ui-li-count">-</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                        <img src="http://www.flaticon.com/png/256/18398.png">
+                        <h2>预约: A1217V021 | 供应商: Tesso</h2>
+                        <p>车型: 飞翼 | 车牌: 苏E19528 | 货量: 140M3 | 计划到达: 14:00-15:00</p>
+                        <p class="ui-li-aside"><strong>状态:</strong>在途<br><strong>预计:</strong><font color="green"><b>正常</b></font></p>
+                        <span class="ui-li-count">-</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                        <img src="http://www.flaticon.com/png/256/18398.png">
+                        <h2>预约: A1217V022 | 供应商: Tesso</h2>
+                        <p>车型: 飞翼 | 车牌: 苏A22028 | 货量: 140M3 | 计划到达: 15:00-16:00</p>
+                        <p class="ui-li-aside"><strong>状态:</strong>在途<br><strong>预计:</strong><font color="green"><b>正常</b></font></p>
+                        <span class="ui-li-count">-</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                        <img src="http://www.flaticon.com/png/256/18404.png">
+                        <h2>预约: A1217V218 | 供应商: Tesso</h2>
+                        <p>车型: 飞翼 | 车牌: 浙AC19811 | 货量: 140M3 | 计划到达: 17:00-18:00</p>
+                        <p class="ui-li-aside"><strong>状态:</strong>未开始<br><strong>预计:</strong>--</p>
+                        <span class="ui-li-count">-</span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+
+        <div class="ui-grid-a">
+
+            <div class="ui-block-a" style="padding:10px 20px;">
+                <div data-role="collapsible" data-theme="d" data-content-theme="d" data-mini="true" class="ui-icon-alt" data-collapsed-icon="alert" data-expanded-icon="arrow-d">
+                    <h2>未开始</h2>
+                    <ul data-role="listview" data-inset="true" data-count-theme="b" data-filter="true">
+                        <li data-icon="gear">
+                            <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                                <span class="ui-li-count">4</span>
+                                <p><strong>A1217V218 </strong></p>
+                                <p>车型: 飞翼</p>
+                                <p>供应商: Tesso</p>
+                                <p>车牌: 浙AC19811</p>
+                                <p>手机:13917078615</p>
+                                <p>货量:140 M3</p>
+                                <p>计划日期:2013-12-17</p>
+                                <p>计划时间段:17:00-18:00</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div data-role="collapsible" data-theme="d" data-content-theme="d" data-mini="true" class="ui-icon-alt" data-collapsed-icon="bars" data-expanded-icon="arrow-d">
+                    <h2>在途</h2>
+                    <ul data-role="listview" data-inset="true" data-count-theme="a" data-filter="true">
+                        <li data-icon="gear">
+                            <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                                <span class="ui-li-count">延迟</span>
+                                <p><strong>A1217V020</strong></p>
+                                <p>车型: 飞翼</p>
+                                <p>供应商: Tesso</p>
+                                <p>车牌: 沪A81122</p>
+                                <p>手机:13917078615</p>
+                                <p>货量:140 M3</p>
+                                <p>计划日期:2013-12-17</p>
+                                <p>计划时间段:9:00-9:45</p>
+                            </a>
+                        </li>
+                        <li data-icon="gear">
+                            <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                                <span class="ui-li-count">正常</span>
+                                <p><strong>A1217V021</strong></p>
+                                <p>车型: 飞翼</p>
+                                <p>供应商: Tesso</p>
+                                <p>车牌: 苏E19528</p>
+                                <p>手机:13917078615</p>
+                                <p>货量:140 M3</p>
+                                <p>计划日期:2013-12-17</p>
+                                <p>计划时间段:14:00-15:00</p>
+                            </a>
+                        </li>
+                        <li data-icon="gear">
+                            <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                                <span class="ui-li-count">正常</span>
+                                <p><strong>A1217V021</strong></p>
+                                <p>车型: 飞翼</p>
+                                <p>供应商: Tesso</p>
+                                <p>车牌: 苏22028</p>
+                                <p>手机:13917078615</p>
+                                <p>货量:140 M3</p>
+                                <p>计划日期:2013-12-17</p>
+                                <p>计划时间段:15:00-16:00</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div><!-- blocka -->
+
+
+            <div class="ui-block-b" style="padding:10px 20px;">
+
+                <div data-role="collapsible" data-theme="d" data-content-theme="d" data-mini="true" class="ui-icon-alt" data-collapsed-icon="home" data-expanded-icon="arrow-d">
+                    <h2>已到达</h2>
+                    <ul data-role="listview" data-inset="true" data-count-theme="b" data-filter="true">
+                        <li data-icon="gear">
+                            <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                                <span class="ui-li-count">道口4</span>
+                                <p><strong>A1217V213 </strong></p>
+                                <p>车型: 飞翼</p>
+                                <p>供应商: Tesso</p>
+                                <p>车牌: 苏EA7011</p>
+                                <p>手机:13917078615</p>
+                                <p>货量:140 M3</p>
+                                <p>计划日期:2013-12-17</p>
+                                <p>计划时间段:8:00-9:00</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div data-role="collapsible" data-theme="d" data-content-theme="d" data-mini="true" class="ui-icon-alt" data-collapsed-icon="gear" data-expanded-icon="arrow-d">
+                    <h2>作业中</h2>
+                    <ul data-role="listview" data-inset="true" data-count-theme="b" data-filter="true">
+                        <li data-icon="gear">
+                            <a href="itms_dock_iKanDetail1.html" rel="external" data-transition="flip" data-inline="true">
+                                <span class="ui-li-count">道口2</span>
+                                <p><strong>A1217V219</strong></p>
+                                <p>车型: 飞翼</p>
+                                <p>供应商: Tesso</p>
+                                <p>车牌: 浙AY92925</p>
+                                <p>手机:13917078615</p>
+                                <p>货量:140 M3</p>
+                                <p>计划日期:2013-12-17</p>
+                                <p>计划时间段:9:00-10:00</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div><!-- /grid-a -->
+
+        <p align="center">
+            <a href="#"><img class="popphoto" src="logo.png" height="50px"></a>
+            <br><font size="2" color="gray"><b>itms</b><font color="white">SYSTEM</font></font>
+        </p>
+
+
+        <!-- defaultpanel  -->
+        <div data-role="panel" id="defaultpanel" data-theme="a" data-display="overlay" data-position="left">
+            <div class="panel-content">
+                <p align="center">
+                    我的 <font color="orange"><b>iTMS</b></font>
+                    <br><font size="1" font color="gray">道口管理</font>
+                </p>
+
+                <ul data-role="listview" data-inset="true" class="ui-icon-alt" data-theme="d">
+                    <li data-icon="bars"><a href="itms_Dock_KANBAN_S1.html" rel="external">清单看板</a></li>
+                    <li data-icon="search"><a href="itms_Dock_KANBAN_S2.html" rel="external">地图看板</a></li>
+                    <li data-icon="arrow-u"><a href="#" rel="external">交货单上载</a></li>
+                </ul>
+                <br><br>
+                <p align="center"><a href="#" data-rel="close" class="ui-icon-nodisc" data-role="button" data-icon="grid" data-iconshadow="false" data-iconpos="notext" data-theme="b">Close</a></p>
+
+            </div><!-- /content wrapper for padding -->
+        </div><!-- /defaultpanel -->
+
+
+    </div><!-- /page -->
+    </div>
+
+
+
+</body>
+</html>
