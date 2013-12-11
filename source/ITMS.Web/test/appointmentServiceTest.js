@@ -15,8 +15,8 @@ asyncTest("getAppointmentByMobile",1, function () {
 asyncTest("createNewAppointment", 1,function () {
     var option = {
         key: 'key0001',
-        driver: 'jim',
-        mobile: '13907900790',
+        driver: 'TOM',
+        mobile: '13879047702',
         vendorCode: 'v0007',
         vehicleType: 'A',
         vehicleLicense: '25865',

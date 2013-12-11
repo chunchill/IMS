@@ -9,12 +9,13 @@
     <link href="css/jquery.mobile.structure-1.3.2.css" rel="stylesheet" />
     <link href="css/site.css" rel="stylesheet" />
     <script src="scripts/lib/jquery-1.8.2.js"></script>
-    <!--<script src="scripts/app/knockout.jquery.mobile.js"></script>-->
+   <script src="scripts/app/knockout.jquery.mobile.js"></script>
     <script src="scripts/lib/jquery.mobile-1.3.2.js"></script>
     <script src="scripts/lib/amplify.js"></script>
     <script src="scripts/lib/knockout-2.2.0.js"></script>
     <script src="scripts/lib/knockout.mapping-latest.js"></script>
     <script src="scripts/lib/koExternalTemplateEngine_all.js"></script>
+    <script src="scripts/lib/moment.min.js"></script>
     <script src="scripts/app/staticdata.js"></script>
     <script src="scripts/app/services/appointment.js"></script>
     <script src="scripts/app/viewmodel/TempAppointmentViewModel.js"></script>
@@ -99,24 +100,20 @@
         </div>
             <div style="padding:10px 20px;">
                 <br>
-                <input id="autocompleteV" data-role="listview" data-theme="d" data-mini="ture" data-inset="true" placeholder="输入供应商代码..." data-bind="value:deliveryOrderInformation.vendorCode"></input>
-                <br><br>
-                <ul id="autocompleteDN" data-role="listview" data-theme="d" data-mini="ture" data-inset="true" data-filter="true" data-filter-placeholder="输入交货单号..." data-filter-theme="d"></ul>
+                <input id="autocompleteV" type="text" data-theme="d" placeholder="输入供应商代码..." data-bind="value:vendorCode">
+                <input id="autocompleteDN" type="text" data-theme="d" placeholder="输入交货单号..." data-bind="value:deliveryNoteIdToAdd">
                 <p align="center">
                     <a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a>
-                    <a href="#" class="ui-icon-nodisc" data-role="button" data-icon="plus" data-iconpos="notext" data-inline="true" data-theme="e" data-iconshadow="false">Add</a>
+                    <a href="#" class="ui-icon-nodisc" data-role="button" data-icon="plus" data-iconpos="notext" data-inline="true" data-theme="e" data-iconshadow="false" data-bind="click:addOneDeliveryNoteId">Add</a>
                 </p>
                 <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true" data-collapsed="false">
                     <legend>步骤2/2: 添加交货单</legend>
-                    <ul data-role="listview" data-inset="true" data-theme="e" >
-                        <li data-icon="check"><a href="#">201121111</a></li>
-                        <li data-icon="check"><a href="#">201121112</a></li>
-                        <li data-icon="check"><a href="#">201121113</a></li>
-                        <li data-icon="check"><a href="#">201121114</a></li>
+                    <ul data-role="listview" data-inset="true" data-theme="e" data-bind="foreach:deliveryNoteId,jqmRefreshList:deliveryNoteId">
+                        <li data-icon="delete" data-bind="click:$parent.removeOneDeliveryId"><a href="#"><span data-bind="text: $data"></span></a></li>
                     </ul>
                 </fieldset>  <p align="center">
-                    <a href="#theFirstStepView" data-direction="reverse" data-role="button" data-inline="true" data-icon="back" data-theme="d">返回</a>
-                    <a href="#theThirdStepView" data-role="button" data-inline="true" data-icon="arrow-r" data-theme="d">下一步</a>
+                                 <a href="#" data-role="button" data-inline="true" data-icon="back" data-theme="d" data-bind="click:$parent.goBackToCarInformationPage">返回</a>
+                                 <a href="#" data-role="button" data-inline="true" data-icon="arrow-r" data-theme="d" data-bind="click:$parent.nextStepToSubmitPage">下一步</a>
                 </p>
             </div>
         <div data-role="content">
@@ -163,21 +160,17 @@
                     </form>
                 </fieldset>
 
-                <fieldset data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true">
-                    <legend>交货单信息<font color="gray">4</font></legend>
-
-                    <ul data-role="listview" data-inset="true" data-theme="d">
-                        <li data-icon="check"><a href="#">201121111</a></li>
-                        <li data-icon="check"><a href="#">201121112</a></li>
-                        <li data-icon="check"><a href="#">201121113</a></li>
-                        <li data-icon="check"><a href="#">201121114</a></li>
+                <fieldset data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" data-bind="with:deliveryOrderInformation">
+                    <legend>交货单信息</legend>
+                    <ul data-role="listview" data-inset="true" data-theme="e" data-bind="foreach:deliveryNoteId,jqmRefreshList:deliveryNoteId">
+                        <li data-icon="check"><a href="#"><span data-bind="text: $data"></span></a></li>
                     </ul>
                 </fieldset>
 
 
                 <p align="center">
-                    <a href="#theSecondStepView" data-direction="reverse" data-role="button" data-inline="true" data-icon="back" data-theme="d">返回</a>
-                    <a href="#result" data-role="button" data-inline="true" data-icon="check" data-theme="b">提交</a>
+                    <a href="#"  data-role="button" data-inline="true" data-icon="back" data-theme="d" data-bind="click:goBackToDeliveryOrderInformation">返回</a>
+                    <a href="#" data-role="button" data-inline="true" data-icon="check" data-theme="b" data-bind="click:submit">提交</a>
                 </p>
             </div>
         </form>
@@ -209,7 +202,7 @@
                     <a href="#"><img class="popphoto" src="images/done.png" height="50px"></a><br>
                     <a href="#" data-role="button" class="ui-icon-nodisc" data-iconshadow="false" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">Check</a><br>
                     <font size="1" color="green">创建成功</font><br><br>
-                    <font size="4" color="green"><b>预约号: 20131113AB11</b></font>
+                    <font size="4" color="green"><b>预约号: <span data-bind="text:sucessfullAppointmentId"></span></b></font>
                 </p>
 
             </div>
