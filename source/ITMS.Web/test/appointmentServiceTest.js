@@ -10,6 +10,16 @@ asyncTest("getAppointmentByMobile",1, function () {
     });
 });
 
+//Test API: getAllShortParkingAppointments
+asyncTest("getAllShortParkingAppointments", 1, function () {
+    IMS.datacontext.appointment.getAllShortParkingAppointments().then(function (result) {
+        if (result.errorMessage == 'NO_DATA') {
+            ok(true, "we have got none records short parking appointments")
+            start();
+        }
+    });
+});
+
 
 //Test API: newApp
 asyncTest("createNewAppointment", 1,function () {

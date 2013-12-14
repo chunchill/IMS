@@ -1,163 +1,26 @@
-﻿
-<!doctype html>
+﻿<!doctype html>
 <html>
 <head>
     <title>道口管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html; charset=GBK" />
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-
-    <script type="text/javascript"
-            src="http://maps.google.com/maps/api/js?sensor=true">
-
-    </script>
-    <script type="text/javascript">
-        function initialize() {
-
-            var CENTERLatlng = new google.maps.LatLng(31.164871, 121.474717);
-            var mapOptions = {
-                zoom: 12,
-                center: CENTERLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-            var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-            var mapall = new google.maps.Map(document.getElementById("map_canvasall"), mapOptions);
-
-            var image = {
-                url: 'http://maps.google.com/mapfiles/marker_orange.png',
-                // This marker is 20 pixels wide by 32 pixels tall.
-                size: new google.maps.Size(20, 32),
-                // The origin for this image is 0,0.
-                origin: new google.maps.Point(0, 0),
-                // The anchor for this image is the base of the flagpole at 0,32.
-                anchor: new google.maps.Point(0, 32)
-            };
-
-            var contentString = '<div id="content">' +
-                  '<div id="siteNotice">' +
-                  '</div>' +
-                  '<h1 id="firstHeading" class="firstHeading">短泊车A1</h1>' +
-                  '<div id="bodyContent">' +
-                  '<p>最新位置: 31.186052517361,121.4860172526</p>' +
-                  '<p>时间: 2013-12-17 09:45 AM</p>' +
-                  '<p>速度: 81KM/h; 方向: 东南</p>' +
-                  '<p>司机: 张三; 手机: 13918121120</p>' +
-                  '</div>' +
-                  '</div>';
-
-            var MLATLON_NI1 = new google.maps.LatLng(31.186052517361, 121.4860172526);
-            var MARKER_NI1 = new google.maps.Marker({
-                position: MLATLON_NI1,
-                map: map
-            });
-            var IWI1 = new google.maps.InfoWindow({
-                content: contentString
-            });
-
-            var MLATLON_s1 = new google.maps.LatLng(31.286052517361, 121.4960172526);
-            var MARKER_s1 = new google.maps.Marker({
-                position: MLATLON_s1,
-                icon: image,
-                map: map
-            });
-            var IWIs1 = new google.maps.InfoWindow({
-                content: "站点1"
-            });
-
-            var MLATLON_s2 = new google.maps.LatLng(31.296052517361, 121.500172526);
-            var MARKER_s2 = new google.maps.Marker({
-                position: MLATLON_s2,
-                icon: image,
-                map: map
-            });
-            var IWIs2 = new google.maps.InfoWindow({
-                content: "站点2"
-            });
-
-            var MLATLON_s3 = new google.maps.LatLng(31.276052517361, 121.510172526);
-            var MARKER_s3 = new google.maps.Marker({
-                position: MLATLON_s3,
-                icon: image,
-                map: map
-            });
-            var IWIs3 = new google.maps.InfoWindow({
-                content: "站点3"
-            });
-
-            IWIs1.open(map, MARKER_s1);
-            IWIs2.open(map, MARKER_s2);
-            IWIs3.open(map, MARKER_s3);
-
-
-            var flightPlanCoordinates01 = [
-            new google.maps.LatLng(31.176877441406, 121.44859239366),
-            new google.maps.LatLng(31.178676486545, 121.44504340278),
-            new google.maps.LatLng(31.178828396267, 121.43756537543),
-            new google.maps.LatLng(31.184308268229, 121.42470106337),
-            new google.maps.LatLng(31.192237955729, 121.41914957682),
-            new google.maps.LatLng(31.200186631944, 121.41341281467),
-            new google.maps.LatLng(31.206286621094, 121.41217719184),
-            new google.maps.LatLng(31.203927951389, 121.40887478299),
-            new google.maps.LatLng(31.199114854601, 121.39631863064),
-            new google.maps.LatLng(31.191640625, 121.38309217665),
-            new google.maps.LatLng(31.188350423177, 121.37343722873),
-            new google.maps.LatLng(31.178363715278, 121.35328423394),
-            new google.maps.LatLng(31.172882758247, 121.34736545139),
-            new google.maps.LatLng(31.16928656684, 121.33986056858),
-            new google.maps.LatLng(31.178400065104, 121.33225423177),
-            new google.maps.LatLng(31.188385416667, 121.32743055556),
-            new google.maps.LatLng(31.192885199653, 121.32694091797),
-            new google.maps.LatLng(31.192896050347, 121.3269414605),
-            new google.maps.LatLng(31.186052517361, 121.4860172526)
-            ];
-            var lineSymbol01 = {
-                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                scale: 5,
-                strokeColor: 'red'
-            };
-            var flightPath01 = new google.maps.Polyline({
-                path: flightPlanCoordinates01,
-                strokeColor: 'gray',
-                icons: [{
-                    icon: lineSymbol01,
-                    offset: '100%'
-                }]
-            });
-            flightPath01.setMap(map);
-            var count01 = 0;
-            window.setInterval(function () {
-                count01 = (count01 + 1) % 200;
-                var iconss01 = flightPath01.get('icons');
-                iconss01[0].offset = (count01 / 2) + '%';
-                flightPath01.set('icons', iconss01);
-            }, 90);
-
-            MARKER_NI1.setAnimation(google.maps.Animation.BOUNCE);
-
-            google.maps.event.addListener(MARKER_NI1, "click", function (e) { IWI1.open(map, MARKER_NI1); });
-            function toggleBounceI1() {
-                if (MARKER_NI1.getAnimation() != null) {
-                    MARKER_NI1.setAnimation(null);
-                } else {
-                    MARKER_NI1.setAnimation(google.maps.Animation.BOUNCE);
-                }
-            }
-            google.maps.event.addListener(MARKER_NI1, "click", toggleBounceI1);
-
-        }
-    </script>
-
-    <style>
-        .panel-content {
-            padding: 15px;
-        }
-    </style>
-
+    <link href="../css/jquery.mobile-1.3.2.css" rel="stylesheet" />
+    <script src="../scripts/lib/jquery-1.8.2.js"></script>
+    <script src="../scripts/lib/jquery.mobile-1.3.2.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"> </script>
+    <script src="../scripts/lib/knockout.debug-3.0.0.js"></script>
+    <script src="../scripts/lib/koExternalTemplateEngine_all.js"></script>
+    <script src="../scripts/lib/knockout-google-maps.js"></script>
+    <script src="../scripts/app/ko.extentions.js"></script>
+    <script src="../scripts/lib/amplify.js"></script>
+    <script src="../scripts/app/services/appointment.js"></script>
+    <script src="../scripts/app/services/location.js"></script>
+    <script src="../scripts/app/viewmodel/ShortParkingBoardViewModel.js"></script>
+    <script src="../scripts/app/app.js"></script>
+    <script src="../scripts/app/shortParkingBoardApp.js"></script>
 </head>
-<body onload="initialize()">
-    <div data-role="page" id="page1" data-theme="b">
+<body>
+    <div data-role="page" id="shortParkingPageView" data-theme="b">
         <div data-role="header" data-position="fixed" data-theme="c">
             <h1><font size="3">道口管理</font></h1>
             <a href="#defaultpanel" data-rel="popup" data-icon="grid" data-theme="c"><font size="1">控制面板</font></a>
@@ -165,7 +28,7 @@
         </div>
 
         <p align="center">
-            <a href="#"><img class="popphoto" src="http://www.flaticon.com/png/256/573.png" height="40px"></a><br>
+            <a href="#"><img class="popphoto" src="../images/shortParking.png" height="40px"></a><br>
             <font size="2" color="gray"><b>短泊资源</b></font><br>
             <font size="1" color="gray">地图看板</font>
         </p>
@@ -174,71 +37,57 @@
             <h2>全局图</h2>
             <form>
                 <div data-role="content">
-                    <div class="ui-bar-c  ui-shadow">
-                        <div id="map_canvasall" style="height:240px;"></div>
+                    <div class="ui-bar-c  ui-shadow" data-bind="with:allAppointmentMap">
+                        <div id="map_canvasall" style="height:360px;" data-bind="gmaps:{center:center,markers:markers,zoom:zoom,polylinePoints:polylinePoints}"></div>
                     </div>
                 </div>
             </form>
         </div>
-
         <div class="ui-grid-a">
             <div class="ui-block-a" style="padding:10px 20px;">
                 <div data-role="collapsible" data-collapsed="false" class="ui-icon-alt" data-theme="b" data-mini="true" data-content-theme="b" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
                     <h2>短泊资源清单</h2>
-
-                    <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-count-theme="b">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a" style="padding:10px 20px;">
+                            <p align="center">
+                                <label for="time-1">开始时间</label>
+                                <input type="time" name="time-1" id="time-1" data-inline="true" data-mini="ture" data-theme="a" data-bind="value:startTime">
+                            </p>
+                        </div>
+                        <div class="ui-block-b" style="padding:10px 20px;">
+                            <p align="center">
+                                <label for="time-2">结束时间</label>
+                                <input type="time" name="time-1" id="time-1" data-inline="true" data-mini="ture" data-theme="a" data-bind="value:endTime">
+                            </p>
+                        </div>
+                    </div>
+                    <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-count-theme="b" data-bind="jqmTemplate:{name:'shortParkingBoardItem',foreach:allShortParkingAppointmentBriefItems},jqmRefreshList:allShortParkingAppointmentBriefItems"></ul>
+                    <script type="text/html" id="shortParkingBoardItem">
                         <li>
-                            <a href="#popupMap" data-rel="popup" data-position-to="window">
+                            <a href="#" data-rel="popup" data-position-to="window" data-bind="click:$parent.itemClick">
                                 <img src="http://www.flaticon.com/png/256/24192.png">
-                                <h2>短泊车: S0001</h2>
-                                <p>车型: 飞翼 | 车牌: 沪A81122 | 最大载货量: 2T | 联系方式: 13917811111</p>
-                                <p class="ui-li-aside"><strong>更新时间:</strong>16:01</strong></p>
-                                <span class="ui-li-count">行驶中</span>
+                                <h2>短泊车: <span data-bind="text:applicationId"></span></h2>
+                                <p>车型: <span data-bind="text:vehicleType"></span> | 车牌: <span data-bind="text:vehicleLicense"></span> | 最大载货量: <span data-bind="text:deliveryVolSum"></span> | 联系方式: <span data-bind="text:mobile"></span></p>
                             </a>
                         </li>
-
-                        <li>
-                            <a href="#popupMap" data-rel="popup" data-position-to="window">
-                                <img src="http://www.flaticon.com/png/256/24192.png">
-                                <h2>短泊车: S0002 </h2>
-                                <p>车型: 飞翼 | 车牌: 沪A81122 | 最大载货量: 2T | 联系方式: 13917811111</p>
-                                <p class="ui-li-aside"><strong>更新时间:</strong>16:01</strong></p>
-                                <span class="ui-li-count">停止</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#popupMap" data-rel="popup" data-position-to="window">
-                                <img src="http://www.flaticon.com/png/256/24192.png">
-                                <h2>短泊车: S0003</h2>
-                                <p>车型: 飞翼 | 车牌: 沪A81122 | 最大载货量: 2T | 联系方式: 13917811111</p>
-                                <p class="ui-li-aside"><strong>更新时间:</strong>16:01</strong></p>
-                                <span class="ui-li-count">离线</span>
-                            </a>
-                        </li>
-                    </ul>
-
+                    </script>
                 </div>
-
-
             </div>
             <div class="ui-block-b" style="padding:10px 20px;">
                 <div data-role="collapsible" data-collapsed="false" class="ui-icon-alt" data-theme="b" data-content-theme="b" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-mini="true">
-                    <h2>全局图</h2>
+                    <h2>短泊车监控</h2>
                     <form>
                         <div data-role="content">
-                            <div class="ui-bar-c  ui-shadow">
-                                <div id="map_canvas" style="height:400px;"></div>
+                            <div class="ui-bar-c  ui-shadow" data-bind="with:selectedAppointmentMap">
+                                <div id="map_canvas" style="height:400px;" data-bind="gmaps:{center:center,markers:markers,zoom:zoom,polylinePoints:polylinePoints}"></div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
-
         <p align="center">
-            <a href="#"><img class="popphoto" src="logo.png" height="50px"></a>
+            <a href="#"><img class="popphoto" src="../images/footico.png" height="50px"></a>
             <br><font size="2" color="gray"><b>itms</b><font color="white">SYSTEM</font></font>
         </p>
 
@@ -259,19 +108,8 @@
                 <br><br>
                 <p align="center"><a href="#" data-rel="close" class="ui-icon-nodisc" data-role="button" data-icon="grid" data-iconshadow="false" data-iconpos="notext" data-theme="b">Close</a></p>
             </div><!-- /content wrapper for padding -->
-        </div><!-- /defaultpanel -->
-
-        <div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="b" data-corners="false" data-tolerance="15,15">
-            <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-            <iframe src="map_order.html" width="1000" height="600" seamless></iframe>
         </div>
-
-        <div data-role="popup" id="popupMapAll" data-overlay-theme="a" data-theme="b" data-corners="false" data-tolerance="15,15">
-            <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-            <iframe src="map_all.html" width="1200" height="600" seamless></iframe>
-        </div>
-
+        <!-- /defaultpanel -->
     </div><!-- /page -->
-    </div>
 </body>
 </html>

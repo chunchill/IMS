@@ -1,7 +1,5 @@
 ﻿window.IMS = window.IMS || {};
-IMS.datacontext = {
-  
-};
+IMS.datacontext = IMS.datacontext || {};
 IMS.datacontext.appointment = (function ($, amplify) {
     var serverUrl = 'http://211.144.85.15:8080/blade/rest';
     var init = function () {
@@ -9,6 +7,13 @@ IMS.datacontext.appointment = (function ($, amplify) {
             url: serverUrl + '/application/getAppBriefListM.jsonp?mobile={mobile}&status={status}',
             dataType: 'jsonp',
             type:'GET'
+        });
+
+        //getAppBriefListS 
+        amplify.request.define('getAllShortParkingAppointments', 'ajax', {
+            url: serverUrl + '/application/getAppBriefListS.jsonp?status=8',
+            dataType: 'jsonp',
+            type: 'GET'
         });
 
         amplify.request.define('getAppHead', 'ajax', {
@@ -52,6 +57,10 @@ IMS.datacontext.appointment = (function ($, amplify) {
         return defferedRequest('getAppointmentByMobile', option)
     };
 
+    getAllShortParkingAppointments = function (option) {
+        return defferedRequest('getAllShortParkingAppointments', option)
+    };
+
     getAppointmentHead = function (option) {
         return defferedRequest('getAppHead', option)
     };
@@ -72,6 +81,7 @@ IMS.datacontext.appointment = (function ($, amplify) {
 
     return {
         getAppointmentByMobile: getAppointmentByMobile,
+        getAllShortParkingAppointments:getAllShortParkingAppointments,
         getAppointmentHead: getAppointmentHead,
         getAppointmentDeliveryItems: getAppointmentDeliveryItems,
         excuteAppointment: excuteAppointment,
