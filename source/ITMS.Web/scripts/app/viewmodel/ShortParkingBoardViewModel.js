@@ -13,13 +13,13 @@
             // The anchor for this image is the base of the flagpole at 0,32.
             anchor: new google.maps.Point(0, 32)
         },
-        buildInforWindowContent = function (lat, lng, mobile, bearing, speed) {
+        buildInforWindowContent = function (lat, lng, mobile, bearing, speed,timeStamp) {
             var contentString = '<div id="content">' +
                                   '<div id="siteNotice">' +
                                   '</div>' +
                                   '<div id="bodyContent">' +
                                   '<p>最新位置: ' + lat + ',' + lng + '</p>' +
-                                  '<p>时间: 2013-12-17 09:45 AM</p>' +
+                                  '<p>时间: '+timeStamp +'</p>' +
                                   '<p>速度: ' + speed + '; 方向: ' + bearing + '</p>' +
                                   '<p> 手机: ' + mobile + '</p>' +
                                   '</div>' +
@@ -30,7 +30,7 @@
              var marker = {};
              marker.latitude = record.latG;
              marker.longitude = record.lngG;
-             marker.infoWindowContent = buildInforWindowContent(record.latG, record.lngG, record.mobile, record.bearing, record.speed);
+             marker.infoWindowContent = buildInforWindowContent(record.latG, record.lngG, record.mobile, record.bearing, record.speed, record.timestamp);
              return marker;
          };
 
@@ -62,6 +62,9 @@
             });
         };
 
+        var date = new Date();
+        var today = moment(date).format("YYYY-MM-DD");
+        self.searchDate = ko.observable(today);
         self.startTime = ko.observable('08:00:00');
         self.endTime = ko.observable('20:00:00');
         self.selectedAppointmentMap = {
@@ -80,7 +83,9 @@
             });
 
             //binding the polyline
-            options = { appId: item.applicationId, mobile: item.mobile, startTS: '2013-12-13 08:00:00', endTS: '2013-12-13 20:00:00' };
+            var startTimeStamp = self.searchDate() + " " + self.startTime() + ":00";
+            var endTimeStamp = self.searchDate() + " " + self.endTime() + ":00";
+            options = { appId: item.applicationId, mobile: item.mobile, startTS: startTimeStamp, endTS: endTimeStamp };
             IMS.datacontext.location.getLocGeoAll(options).then(function (result) {
                 var points = [];
                 ko.utils.arrayForEach(result, function (oneRecord) {

@@ -5,7 +5,7 @@ IMS.datacontext.location = (function ($, amplify) {
     var init = function () {
         //get the latest position for all the cars
         amplify.request.define('getLastLocGeoAll', 'ajax', {
-            url: serverUrl + '/location/getLastLocGeoAll.jsonp?status=8',
+            url: serverUrl + '/location/getLastLocGeoAllS.jsonp?status=8',
             dataType: 'jsonp',
             type: 'GET'
         });
