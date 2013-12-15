@@ -13,18 +13,31 @@
             // The anchor for this image is the base of the flagpole at 0,32.
             anchor: new google.maps.Point(0, 32)
         },
-        buildInforWindowContent = function (lat, lng, mobile, bearing, speed,timeStamp) {
+        buildInforWindowContent = function (lat, lng, mobile, bearing, speed, timeStamp) {
+            if (mobile === undefined && bearing === undefined && speed === undefined && timeStamp === undefined) return null;
             var contentString = '<div id="content">' +
                                   '<div id="siteNotice">' +
                                   '</div>' +
                                   '<div id="bodyContent">' +
                                   '<p>最新位置: ' + lat + ',' + lng + '</p>' +
-                                  '<p>时间: '+timeStamp +'</p>' +
+                                  '<p>时间: ' + timeStamp + '</p>' +
                                   '<p>速度: ' + speed + '; 方向: ' + bearing + '</p>' +
                                   '<p> 手机: ' + mobile + '</p>' +
                                   '</div>' +
                                   '</div>';
             return contentString;
+        },
+        buildDefaultMarkers = function (records) {
+            var markers = [];
+            ko.utils.arrayForEach(records, function (item) {
+                var marker = {};
+                marker.latitude = item.lat();
+                marker.longitude = item.lng();
+                marker.infoWindowContent = null;
+                marker.icon = markerOrangeImage;
+                markers.push(marker);
+            });
+            return markers;
         },
          buildMarker = function (record) {
              var marker = {};
@@ -42,8 +55,30 @@
         };
 
         self.allShortParkingAppointmentBriefItems = ko.observableArray();
+       
 
+        var date = new Date();
+        var today = moment(date).format("YYYY-MM-DD");
+        self.searchDate = ko.observable(today);
+        self.startTime = ko.observable('08:00:00');
+        self.endTime = ko.observable('20:00:00');
+        self.selectedAppointmentMap = {
+            center: ko.observable(centerPosition),
+            markers: ko.observableArray(),
+            zoom: ko.observable(8),
+            polylinePoints: ko.observableArray()
+        };
+        var defaultMarkersOfTopMap = [               new google.maps.LatLng(31.1388397, 121.7686836),               new google.maps.LatLng(30.8793497, 121.8126685),               new google.maps.LatLng(31.309008, 121.674382),               new google.maps.LatLng(31.12853339999999, 121.6287952)        ];
+        var defaultMarkers = buildDefaultMarkers(defaultMarkersOfTopMap);
         self.init = function () {
+            //bind the default markers for top map
+           
+          
+            ko.utils.arrayForEach(defaultMarkers, function (maker) {
+                self.allAppointmentMap.markers.push(maker);
+                self.selectedAppointmentMap.markers.push(maker);
+            });
+
             //load markers for the top map 
             IMS.datacontext.location.getLastLocGeoAll().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
@@ -62,24 +97,15 @@
             });
         };
 
-        var date = new Date();
-        var today = moment(date).format("YYYY-MM-DD");
-        self.searchDate = ko.observable(today);
-        self.startTime = ko.observable('08:00:00');
-        self.endTime = ko.observable('20:00:00');
-        self.selectedAppointmentMap = {
-            center: ko.observable(centerPosition),
-            markers: ko.observableArray(),
-            zoom: ko.observable(8),
-            polylinePoints: ko.observableArray()
-        };
-
         self.itemClick = function (item) {
             var options = { appId: item.applicationId };
             IMS.datacontext.location.getLastLocGeo(options).then(function (record) {
                 var oneMarker = buildMarker(record);
                 self.selectedAppointmentMap.markers.removeAll();
                 self.selectedAppointmentMap.markers.push(oneMarker);
+                ko.utils.arrayForEach(defaultMarkers, function (maker) {
+                    self.selectedAppointmentMap.markers.push(maker);
+                });
             });
 
             //binding the polyline
@@ -92,27 +118,6 @@
                     var point = new google.maps.LatLng(oneRecord.latG, oneRecord.lngG);
                     points.push(point);
                 })
-                /*--mock data
-                   var mockPoints=[new google.maps.LatLng(31.176877441406,121.44859239366),
-                                   new google.maps.LatLng(31.178676486545,121.44504340278),
-                                   new google.maps.LatLng(31.178828396267,121.43756537543),
-                                   new google.maps.LatLng(31.184308268229,121.42470106337),
-                                   new google.maps.LatLng(31.192237955729,121.41914957682),
-                                   new google.maps.LatLng(31.200186631944,121.41341281467),
-                                   new google.maps.LatLng(31.206286621094,121.41217719184),
-                                   new google.maps.LatLng(31.203927951389,121.40887478299),
-                                   new google.maps.LatLng(31.199114854601,121.39631863064),
-                                   new google.maps.LatLng(31.191640625,121.38309217665),
-                                   new google.maps.LatLng(31.188350423177,121.37343722873),
-                                   new google.maps.LatLng(31.178363715278,121.35328423394),
-                                   new google.maps.LatLng(31.172882758247,121.34736545139),
-                                   new google.maps.LatLng(31.16928656684,121.33986056858),
-                                   new google.maps.LatLng(31.178400065104,121.33225423177),
-                                   new google.maps.LatLng(31.188385416667,121.32743055556),
-                                   new google.maps.LatLng(31.192885199653,121.32694091797),
-                                   new google.maps.LatLng(31.192896050347,121.3269414605),
-                                   new google.maps.LatLng(30.8793497,121.8126685)];
-                                   --*/
                 self.selectedAppointmentMap.polylinePoints(points);
             });
         };

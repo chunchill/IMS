@@ -249,11 +249,9 @@
         };
 
         self.removeMarker = function (idx) {
-            var marker = _markers[idx];
-
-            _markers.splice(idx, 1);
-            self.markers.splice(idx, 1);
-
+            var marker = _markers[0];
+            _markers.splice(0, 1);
+            self.markers.splice(0, 1);
             marker.setMap(null);
         };
     };
@@ -381,28 +379,6 @@
                     _map.removePolyline();
                     _map.drawPolyline(newValues);
                 });
-                /*
-                bindings.polylinePoints.subscribe(function (changes) {
-                    queueTask(function () {
-                        var removedIndexes = mapFilter(changes, function (item) {
-                            return item.status === 'deleted';
-                        }, function (item) {
-                            return item.index;
-                        });
-                        var added = filter(changes, function (item) {
-                            return item.status === 'added';
-                        });
-
-                        if (removedIndexes.length > 0) {
-                            _map.removePolyline();
-                        }
-                        if (added.length > 0) {
-                            _map.drawPolyline(added);
-                        }
-                    });
-                }, null, 'arrayChange');
-
-                */
             }
         };
     })();
