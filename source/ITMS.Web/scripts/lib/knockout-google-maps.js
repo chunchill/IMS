@@ -211,15 +211,17 @@
                 map: _mapInstance,
                 icon: icon
             });
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-            var toggleBounce= function() {
-                if (marker.getAnimation() != null) {
-                    marker.setAnimation(null);
-                } else {
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
+            if (marker.icon == null || marker.icon == undefined) {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                var toggleBounce = function () {
+                    if (marker.getAnimation() != null) {
+                        marker.setAnimation(null);
+                    } else {
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                    }
                 }
+                google.maps.event.addListener(marker, "click", toggleBounce);
             }
-            google.maps.event.addListener(marker, "click", toggleBounce);
             // TODO: find a better way of mating info windows to knockout templates
             if (infoWindowContent != null) {
                 var infoWindow = new google.maps.InfoWindow({

@@ -31,9 +31,9 @@
             var markers = [];
             ko.utils.arrayForEach(records, function (item) {
                 var marker = {};
-                marker.latitude = item.lat();
-                marker.longitude = item.lng();
-                marker.infoWindowContent = null;
+                marker.latitude = item.latLng.lat();
+                marker.longitude = item.latLng.lng();
+                marker.infoWindowContent = item.contentString;
                 marker.icon = markerOrangeImage;
                 markers.push(marker);
             });
@@ -55,7 +55,7 @@
         };
 
         self.allShortParkingAppointmentBriefItems = ko.observableArray();
-       
+
 
         var date = new Date();
         var today = moment(date).format("YYYY-MM-DD");
@@ -68,12 +68,12 @@
             zoom: ko.observable(8),
             polylinePoints: ko.observableArray()
         };
-        var defaultMarkersOfTopMap = [               new google.maps.LatLng(31.1388397, 121.7686836),               new google.maps.LatLng(30.8793497, 121.8126685),               new google.maps.LatLng(31.309008, 121.674382),               new google.maps.LatLng(31.12853339999999, 121.6287952)        ];
+        var defaultMarkersOfTopMap = [               { latLng: new google.maps.LatLng(31.1388397, 121.7686836), contentString: '站点: 华飞工业园' },               { latLng: new google.maps.LatLng(30.8793497, 121.8126685), contentString: '站点: 上海汽车5号门' },               { latLng: new google.maps.LatLng(31.309008, 121.674382), contentString: '站点: 上海利道国际物流有限公司' },               { latLng: new google.maps.LatLng(31.12853339999999, 121.6287952), contentString: '站点: 苗桥路460号' }        ];
         var defaultMarkers = buildDefaultMarkers(defaultMarkersOfTopMap);
         self.init = function () {
             //bind the default markers for top map
-           
-          
+
+
             ko.utils.arrayForEach(defaultMarkers, function (maker) {
                 self.allAppointmentMap.markers.push(maker);
                 self.selectedAppointmentMap.markers.push(maker);
