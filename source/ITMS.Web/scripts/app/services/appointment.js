@@ -9,36 +9,66 @@ IMS.datacontext.appointment = (function ($, amplify) {
             type:'GET'
         });
 
-        //getAppBriefListS 
+        //getAllShortParkingAppointments by getAppBriefListS
         amplify.request.define('getAllShortParkingAppointments', 'ajax', {
             url: serverUrl + '/application/getAppBriefListS.jsonp?status=8',
             dataType: 'jsonp',
             type: 'GET'
         });
 
+        //getOnWayAppointments by getAppBriefListS
+        amplify.request.define('getOnWayAppointments', 'ajax', {
+            url: serverUrl + '/application/getAppBriefListS.jsonp?status=1',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
+        //getAlreadyArrivedAppointments by getAppBriefListS
+        amplify.request.define('getAlreadyArrivedAppointments', 'ajax', {
+            url: serverUrl + '/application/getAppBriefListS.jsonp?status=3',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
+        //getAlreadyEntryAppointments by getAppBriefListS
+        amplify.request.define('getAlreadyEntryAppointments', 'ajax', {
+            url: serverUrl + '/application/getAppBriefListS.jsonp?status=2',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
+        //getAppHead
         amplify.request.define('getAppHead', 'ajax', {
             url: serverUrl + '/application/getAppHead.jsonp?key={key}&appId={appId}',
             dataType: 'jsonp',
             type: 'GET'
         });
 
+        //getAppItemList
         amplify.request.define('getAppItemList', 'ajax', {
             url: serverUrl + '/application/getAppItemList.jsonp?key={key}&appId={appId}',
             dataType: 'jsonp',
             type: 'GET'
         });
 
+        //execApp
         amplify.request.define('execApp', 'ajax', {
             url: serverUrl + '/application/execApp',
             type: 'POST'
         });
 
+        //newApp
         amplify.request.define('newApp', 'ajax', {
             type: 'POST',
-            //headers:{'origin':'*'},
             url: serverUrl + '/application/newApp',
             crossDomain: true
+        });
 
+        //addAppTimeline
+        amplify.request.define('addAppTimeline', 'ajax', {
+            type: 'POST',
+            url: serverUrl + '/application/addAppTimeline',
+            crossDomain: true
         });
     },
 
@@ -61,6 +91,18 @@ IMS.datacontext.appointment = (function ($, amplify) {
         return defferedRequest('getAllShortParkingAppointments', option)
     };
 
+    getOnWayAppointments = function (option) {
+        return defferedRequest('getOnWayAppointments', option)
+    };
+    
+    getAlreadyArrivedAppointments = function (option) {
+        return defferedRequest('getAlreadyArrivedAppointments', option)
+    };
+
+    getAlreadyEntryAppointments = function (option) {
+        return defferedRequest('getAlreadyEntryAppointments', option)
+    };
+
     getAppointmentHead = function (option) {
         return defferedRequest('getAppHead', option)
     };
@@ -77,15 +119,24 @@ IMS.datacontext.appointment = (function ($, amplify) {
         return defferedRequest('newApp', option)
     };
 
+    addAppTimeline = function (option) {
+        return defferedRequest('addAppTimeline', option)
+    };
+
     init();
 
+    //public methods
     return {
         getAppointmentByMobile: getAppointmentByMobile,
-        getAllShortParkingAppointments:getAllShortParkingAppointments,
+        getAllShortParkingAppointments: getAllShortParkingAppointments,
+        getOnWayAppointments: getOnWayAppointments,
+        getAlreadyArrivedAppointments: getAlreadyArrivedAppointments,
+        getAlreadyEntryAppointments:getAlreadyEntryAppointments,
         getAppointmentHead: getAppointmentHead,
         getAppointmentDeliveryItems: getAppointmentDeliveryItems,
         excuteAppointment: excuteAppointment,
-        createNewAppointment: createNewAppointment
+        createNewAppointment: createNewAppointment,
+        addAppTimeline: addAppTimeline
     }
 }(jQuery, amplify));
 
