@@ -67,7 +67,7 @@ IMS.datacontext.appointment = (function ($, amplify) {
         //addAppTimeline
         amplify.request.define('addAppTimeline', 'ajax', {
             type: 'POST',
-            url: serverUrl + '/application/addAppTimeline',
+            url: serverUrl + '/location/addAppTimeline',
             crossDomain: true
         });
     },
