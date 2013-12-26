@@ -32,52 +32,50 @@
                 <b>编辑预约</b><br><br>
                 <font color="gray">出入场管理</font>
             </p>
-            <form>
-                <div style="padding:10px 20px;">
-                    <script type="text/html" id="appointmentItem">
-                        <!-- ko if: ($index()===0&&$data.status()===1) -->
-                        <li data-role="list-divider">预约信息<span class="ui-li-count" data-bind="text:$parent.onWayItems().length"></span></li>
-                        <!-- /ko -->
-                        <!-- ko if: ($index()===0&&$data.status()===2) -->
-                        <li data-role="list-divider">预约信息<span class="ui-li-count" data-bind="text:$parent.alreadyArrivedItems().length"></span></li>
-                        <!-- /ko -->
-                        <!-- ko if: ($index()===0&&$data.status()===3) -->
-                        <li data-role="list-divider">预约信息<span class="ui-li-count" data-bind="text:$parent.alreadyEntryItems().length"></span></li>
-                        <!-- /ko -->
-                        <li data-icon="gear">
-                            <a href="#" data-rel="popup" data-transition="slideup" data-bind="click:$parent.itemClicked">
-                                <p><strong data-bind="text:applicationId"></strong></p>
-                                <p>车牌: <span data-bind="text:vehicleLicense"></span></p>
-                                <p>手机:<span data-bind="text:mobile"></span></p>
-                                <p>货量:<span data-bind="text:deliveryVolSum"></span></p>
-                                <p>计划日期:<span data-bind="text:planedDevelieryDate"></span></p>
-                                <p>计划时间段:<span data-bind="text:planedEarliestDevelieryDate"></span>-<span data-bind="text:planedLatestDevelieryDate"></span></p>
-                                <p><span data-bind="text:vendorCode"></span></p>
-                                <p><font color="gray">道口:<span data-bind="text:dock"></span></font></p>
-                            </a>
-                        </li>
-                    </script>
-                    <div data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
-                        <h2>在途清单</h2>
-                        <p align="center"><a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a></p>
-                        <ul data-role="listview" data-inset="true" data-count-theme="d" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:onWayItems},jqmRefreshList:onWayItems"></ul>
-                    </div>
-
-                    <div data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
-                        <h2>到达清单</h2>
-                        <p align="center"><a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a></p>
-                        <ul data-role="listview" data-inset="true" data-count-theme="d" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:alreadyArrivedItems},jqmRefreshList:alreadyArrivedItems"></ul>
-                    </div>
-
-                    <div data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
-                        <h2>已入场清单</h2>
-                        <p align="center"><a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a></p>
-                        <ul data-role="listview" data-inset="true" data-count-theme="d" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:alreadyEntryItems},jqmRefreshList:alreadyEntryItems"></ul>
-                    </div>
-
-
+            <div style="padding:10px 20px;">
+                <script type="text/html" id="appointmentItem">
+                    <!-- ko if: ($index()===0&&$data.status()===1) -->
+                    <li data-role="list-divider">预约信息<span class="ui-li-count" data-bind="text:$parent.onWayItems().length"></span></li>
+                    <!-- /ko -->
+                    <!-- ko if: ($index()===0&&$data.status()===2) -->
+                    <li data-role="list-divider">预约信息<span class="ui-li-count" data-bind="text:$parent.alreadyArrivedItems().length"></span></li>
+                    <!-- /ko -->
+                    <!-- ko if: ($index()===0&&$data.status()===3) -->
+                    <li data-role="list-divider">预约信息<span class="ui-li-count" data-bind="text:$parent.alreadyEntryItems().length"></span></li>
+                    <!-- /ko -->
+                    <li data-icon="gear">
+                        <a href="#" data-rel="popup" data-transition="slideup" data-bind="click:$parent.itemClicked">
+                            <p><strong data-bind="text:applicationId"></strong></p>
+                            <p>车牌: <span data-bind="text:vehicleLicense"></span></p>
+                            <p>手机:<span data-bind="text:mobile"></span></p>
+                            <p>货量:<span data-bind="text:deliveryVolSum"></span></p>
+                            <p>计划日期:<span data-bind="text:planedDevelieryDate"></span></p>
+                            <p>计划时间段:<span data-bind="text:planedEarliestDevelieryDate"></span>-<span data-bind="text:planedLatestDevelieryDate"></span></p>
+                            <p><span data-bind="text:vendorCode"></span></p>
+                            <p><font color="gray">道口:<span data-bind="text:dock"></span></font></p>
+                        </a>
+                    </li>
+                </script>
+                <div data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+                    <h2>在途清单</h2>
+                    <p align="center"><a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a></p>
+                    <ul data-role="listview" data-inset="true" data-count-theme="d" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:onWayItems},jqmRefreshList:onWayItems"></ul>
                 </div>
-            </form>
+
+                <div data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+                    <h2>到达清单</h2>
+                    <p align="center"><a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a></p>
+                    <ul data-role="listview" data-inset="true" data-count-theme="d" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:alreadyArrivedItems},jqmRefreshList:alreadyArrivedItems"></ul>
+                </div>
+
+                <div data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+                    <h2>已入场清单</h2>
+                    <p align="center"><a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a></p>
+                    <ul data-role="listview" data-inset="true" data-count-theme="d" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:alreadyEntryItems},jqmRefreshList:alreadyEntryItems"></ul>
+                </div>
+
+
+            </div>
             <div data-role="content">
                 <p align="center"> <a href="#defaultpanel" data-rel="popup" class="ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">go</a></p>
             </div>
@@ -104,10 +102,10 @@
             <div data-role="popup" id="popupaction" data-theme="d" data-overlay-theme="a">
                 <div style="padding:10px 20px;">
                     <p align="center">
-                        <span>登记到达时间</span>
-                        <input type="time" name="arr_time" id="s_arrtime" value="">
+                        <span data-bind="text:selectedItem.title"></span>
+                        <input type="time" name="arr_time" id="s_arrtime" data-bind="value:selectedItem.entryTime">
                         <br>
-                        <button type="submit" data-theme="b" data-icon="check" data-bind="click:submit">登记</button>
+                        <button data-theme="b" data-icon="check" data-bind="click:onSubmit">登记</button>
                     </p>
                 </div>
             </div>

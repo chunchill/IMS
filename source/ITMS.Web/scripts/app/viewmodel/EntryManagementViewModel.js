@@ -5,7 +5,7 @@
         self.alreadyEntryItems = ko.observableArray();//status:3
         self.alreadyArrivedItems = ko.observableArray();//status:2
         self.onWayItems = ko.observableArray();//status:1
-        self.selectedItem = { appId: ko.observable(), status: ko.observable() };
+        self.selectedItem = { appId: ko.observable(), status: ko.observable(), title: ko.observable("title"), entryTime: ko.observable() };
 
         function addStatus(items, status) {
             items.forEach(function (item) {
@@ -55,19 +55,37 @@
             });
         };
 
-        self.submit = function (dock, item) {
+        self.onSubmit = function (dock, item) {
+            var date = new Date();
+            var today = moment(date).format("YYYY-MM-DD");
+            var now = moment(date).format("HH:mm:ss");
+            var option = { dock: dock, appId: self.selectedItem.appId(), newStatusDescription: self.selectedItem.entryTime(), date: today, time: now };
+            addTimelineForItem(option);
             $("#popupaction").popup("close");
         };
 
         //--public functions
         self.itemClicked = function (item) {
+            if (item === undefined) return;
             self.selectedItem.appId(item.applicationId());
             self.selectedItem.status(item.status());
+            switch (self.selectedItem.status()) {
+                case 3:
+                    self.selectedItem.title('登记出场时间');
+                    break;
+                case 2:
+                    self.selectedItem.title('登记入场时间');
+                    break;
+                case 1:
+                    self.selectedItem.title('登记到达时间');
+                    break;
+                default: break;
+            }
             $("#popupaction").popup("open");
 
         };
 
-        self.getSummaryCount = function (){
+        self.getSummaryCount = function () {
 
         }
 
