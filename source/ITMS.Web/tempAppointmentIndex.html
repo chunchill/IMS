@@ -43,7 +43,7 @@
             <div data-role="content">
                 <p align="center">
                     <a href="#" rel="external"><img class="popphoto" src="images/footico.png" height="30px"></a><br>
-                    <font size="1"  color="orange">i</font><font size="1" font color="#66B3FF">SCM</font><font size="1">: iTMS</font>
+                    <font size="1" color="orange">i</font><font size="1" color="#66B3FF">SCM</font><font size="1">: iTMS</font>
                 </p>
             </div><!-- /content -->
         </div>
@@ -57,34 +57,34 @@
                 <b>创建临时预约</b>
             </p>
         </div>
-            <div style="padding:10px 20px;">
-                <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true" data-collapsed="false">
-                    <legend>步骤1/2: 车辆信息</legend>
-                        <div style="padding:10px 10px;">
-                            <label for="un" class="ui-hidden-accessible">driver name:</label>
-                            <input type="text" name="un" id="un" value="" placeholder="驾驶员" data-theme="e" data-inline="true" data-bind="value:driver">
-                            <label for="mb" class="ui-hidden-accessible">mobile:</label>
-                            <input type="tel" name="tel" id="mb" value="" placeholder="手机" data-theme="e" data-inline="true" data-bind="value:mobile">
-                            <fieldset class="ui-grid-a">
-                                <div class="ui-block-a">
-                                    <select name="select-native-2" id="select-native-2" data-theme="e" data-bind="options:vehicleTypeOptions,value:vehicleType"></select>
-                                </div>
-                                <div class="ui-block-b">
-                                    <select name="select-native-3" id="select-native-3" data-theme="e" data-bind="options:provincesOptions,value:vehicleAbbrev"></select>
-                                </div>
-                            </fieldset>
-                            <label for="lc" class="ui-hidden-accessible">license:</label>
-                            <input type="text" name="lc" id="lc" value="" placeholder="车牌号" data-theme="e" data-inline="true" data-bind="value:vehicleLicenseNumber">
+        <div style="padding:10px 20px;">
+            <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true" data-collapsed="false">
+                <legend>步骤1/2: 车辆信息</legend>
+                <div style="padding:10px 10px;">
+                    <label for="un" class="ui-hidden-accessible">driver name:</label>
+                    <input type="text" name="un" id="un" value="" placeholder="驾驶员" data-theme="e" data-inline="true" data-bind="value:driver">
+                    <label for="mb" class="ui-hidden-accessible">mobile:</label>
+                    <input type="tel" name="tel" id="mb" value="" placeholder="手机" data-theme="e" data-inline="true" data-bind="value:mobile">
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <select name="select-native-2" id="select-native-2" data-theme="e" data-bind="options:vehicleTypeOptions,value:vehicleType"></select>
                         </div>
-                </fieldset>
-                <p align="center">
-                    <a href="#" data-role="button" data-inline="true" data-icon="arrow-r" data-theme="d" data-bind="click:nextStepToAddDeliverOrderPage">下一步</a>
-                </p>
-            </div>
+                        <div class="ui-block-b">
+                            <select name="select-native-3" id="select-native-3" data-theme="e" data-bind="options:provincesOptions,value:vehicleAbbrev"></select>
+                        </div>
+                    </fieldset>
+                    <label for="lc" class="ui-hidden-accessible">license:</label>
+                    <input type="text" name="lc" id="lc" value="" placeholder="车牌号" data-theme="e" data-inline="true" data-bind="value:vehicleLicenseNumber">
+                </div>
+            </fieldset>
+            <p align="center">
+                <a href="#" data-role="button" data-inline="true" data-icon="arrow-r" data-theme="d" data-bind="click:nextStepToAddDeliverOrderPage">下一步</a>
+            </p>
+        </div>
         <div data-role="content">
             <p align="center">
                 <a href="itms_dock_editappmain_cn.html" rel="external"><img class="popphoto" src="images/footico.png" height="30px"></a><br>
-                <font size="1" font color="orange">i</font><font size="1" font color="#66B3FF">SCM</font><font size="1">: iTMS</font>
+                <font size="1" color="orange">i</font><font size="1" font color="#66B3FF">SCM</font><font size="1">: iTMS</font>
             </p>
         </div><!-- /content -->
 
@@ -94,38 +94,47 @@
         <div data-role="content">
             <p align="center"><a href="#"><img class="popphoto" src="images/calenda.png" height="60px"></a></p>
             <p align="center">
-                <font size="1" font color="gray">道口预约</font><br>
+                <font size="1" color="gray">道口预约</font><br>
                 <b>创建临时预约</b>
             </p>
         </div>
-            <div style="padding:10px 20px;">
-                <br>
-                <input id="autocompleteV" type="text" data-theme="d" placeholder="输入供应商代码..." data-bind="value:vendorCode">
-                <input id="autocompleteDN" type="text" data-theme="d" placeholder="输入交货单号..." data-bind="value:deliveryNoteIdToAdd">
-                <p align="center">
-                    <a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a>
-                    <a href="#" class="ui-icon-nodisc" data-role="button" data-icon="plus" data-iconpos="notext" data-inline="true" data-theme="e" data-iconshadow="false" data-bind="click:addOneDeliveryNoteId">Add</a>
-                </p>
-                <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true" data-collapsed="false">
-                    <legend>步骤2/2: 添加交货单</legend>
-                    <ul data-role="listview" data-inset="true" data-theme="e" data-bind="foreach:deliveryNoteId,jqmRefreshList:deliveryNoteId">
-                        <li data-icon="delete" data-bind="click:$parent.removeOneDeliveryId"><a href="#"><span data-bind="text: $data"></span></a></li>
-                    </ul>
-                </fieldset>  <p align="center">
-                                 <a href="#" data-role="button" data-inline="true" data-icon="back" data-theme="d" data-bind="click:$parent.goBackToCarInformationPage">返回</a>
-                                 <a href="#" data-role="button" data-inline="true" data-icon="arrow-r" data-theme="d" data-bind="click:$parent.nextStepToSubmitPage">下一步</a>
-                </p>
-            </div>
+        <div style="padding:10px 20px;">
+            <br>
+            <input id="autocompleteV" type="text" data-theme="d" placeholder="输入供应商代码..." data-bind="value:vendorCode">
+            <input id="autocompleteDN" type="text" data-theme="d" placeholder="输入交货单号..." data-bind="value:deliveryNoteIdToAdd">
+            <p align="center">
+                <a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a>
+                <a href="#" class="ui-icon-nodisc" data-role="button" data-icon="plus" data-iconpos="notext" data-inline="true" data-theme="e" data-iconshadow="false" data-bind="click:addOneDeliveryNoteId">Add</a>
+            </p>
+            <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true" data-collapsed="false">
+                <legend>步骤2/2: 添加交货单</legend>
+                <ul data-role="listview" data-inset="true" data-theme="e" data-bind="foreach:deliveryNoteId,jqmRefreshList:deliveryNoteId">
+                    <li data-icon="delete" data-bind="click:$parent.removeOneDeliveryId"><a href="#"><span data-bind="text: $data"></span></a></li>
+                </ul>
+            </fieldset>  <p align="center">
+                <a href="#" data-role="button" data-inline="true" data-icon="back" data-theme="d" data-bind="click:$parent.goBackToCarInformationPage">返回</a>
+                <a href="#" data-role="button" data-inline="true" data-icon="arrow-r" data-theme="d" data-bind="click:$parent.nextStepToSubmitPage">下一步</a>
+            </p>
+        </div>
         <div data-role="content">
             <p align="center">
                 <a href="itms_dock_editappmain_cn.html" rel="external"><img class="popphoto" src="images/footico.png" height="30px"></a><br>
-                <font size="1" font color="orange">i</font><font size="1" font color="#66B3FF">SCM</font><font size="1">: iTMS</font>
+                <font size="1" color="orange">i</font><font size="1" color="#66B3FF">SCM</font><font size="1">: iTMS</font>
             </p>
         </div><!-- /content -->
 
     </div><!-- /page -->
 
     <div data-role="page" id="theThirdStepView">
+        <div data-role="popup" id="popupMessage" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+            <div data-role="header" data-theme="a" class="ui-corner-top">
+                <h1>错误信息</h1>
+            </div>
+            <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                <p>对不起，您的操作出错了，请重试！</p>
+                <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">确定</a>
+            </div>
+        </div>
         <div data-role="content">
             <p align="center"><a href="#"><img class="popphoto" src="images/calenda.png" height="60px"></a></p>
             <p align="center">
@@ -133,88 +142,65 @@
                 <b>创建临时预约</b>
             </p>
         </div>
+        <div style="padding:10px 20px;">
+            <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true" data-collapsed="false">
+                <legend>预约信息待提交</legend>
+                <div style="padding:10px 10px;">
+                    <div data-role="fieldcontain">
+                        <label for="txdr">驾驶员:</label>
+                        <input type="text" name="txdr" id="txdr" value="Driver Name" disabled="disabled" data-mini="true" data-bind="value:carInformation.driver">
+                        <label for="txmb">手机:</label>
+                        <input type="text" name="txmb" id="txmb" value="Mobile" disabled="disabled" data-mini="true" data-bind="value:carInformation.mobile">
+                        <label for="txlc">车牌:</label>
+                        <input type="text" name="txlc" id="txlc" value="车牌" disabled="disabled" data-mini="true" data-bind="value:carInformation.vehicleLicense">
+                        <label for="txvt">车型:</label>
+                        <input type="text" name="txvt" id="txvt" value="飞翼" disabled="disabled" data-mini="true" data-bind="value:carInformation.vehicleType">
+                        <label for="vd">供应商:</label>
+                        <input type="text" name="vd" id="vd" value="201111021" disabled="disabled" data-mini="true">
 
-        <form>
-            <div style="padding:10px 20px;">
-
-
-                <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true" data-collapsed="false">
-                    <legend>预约信息待提交</legend>
-
-                    <form>
-                        <div style="padding:10px 10px;">
-                            <div data-role="fieldcontain">
-                                <label for="txdr">驾驶员:</label>
-                                <input type="text" name="txdr" id="txdr" value="Driver Name" disabled="disabled" data-mini="true" data-bind="value:carInformation.driver">
-                                <label for="txmb">手机:</label>
-                                <input type="text" name="txmb" id="txmb" value="Mobile" disabled="disabled" data-mini="true" data-bind="value:carInformation.mobile">
-                                <label for="txlc">车牌:</label>
-                                <input type="text" name="txlc" id="txlc" value="车牌" disabled="disabled" data-mini="true" data-bind="value:carInformation.vehicleLicense">
-                                <label for="txvt">车型:</label>
-                                <input type="text" name="txvt" id="txvt" value="飞翼" disabled="disabled" data-mini="true" data-bind="value:carInformation.vehicleType">
-                                <label for="vd">供应商:</label>
-                                <input type="text" name="vd" id="vd" value="201111021" disabled="disabled" data-mini="true">
-
-                            </div>
-                        </div>
-                    </form>
-                </fieldset>
-
-                <fieldset data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" data-bind="with:deliveryOrderInformation">
-                    <legend>交货单信息</legend>
-                    <ul data-role="listview" id="deliveryNotesOverview" data-inset="true" data-theme="e" data-bind="foreach:deliveryNoteId,jqmRefreshList:deliveryNoteId">
-                        <li data-icon="check"><a href="#"><span data-bind="text: $data"></span></a></li>
-                    </ul>
-                </fieldset>
-
-
-                <p align="center">
-                    <a href="#"  data-role="button" data-inline="true" data-icon="back" data-theme="d" data-bind="click:goBackToDeliveryOrderInformation">返回</a>
-                    <a href="#" data-role="button" data-inline="true" data-icon="check" data-theme="b" data-bind="click:submit">提交</a>
-                </p>
-            </div>
-        </form>
-
-
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" data-bind="with:deliveryOrderInformation">
+                <legend>交货单信息</legend>
+                <ul data-role="listview" id="deliveryNotesOverview" data-inset="true" data-theme="e" data-bind="foreach:deliveryNoteId,jqmRefreshList:deliveryNoteId">
+                    <li data-icon="check"><a href="#"><span data-bind="text: $data"></span></a></li>
+                </ul>
+            </fieldset>
+            <p align="center">
+                <a href="#" data-role="button" data-inline="true" data-icon="back" data-theme="d" data-bind="click:goBackToDeliveryOrderInformation">返回</a>
+                <a href="#" data-role="button" data-inline="true" data-icon="check" data-theme="b" data-bind="click:submit">提交</a>
+            </p>
+        </div>
         <div data-role="content">
             <p align="center">
                 <a href="itms_dock_editappmain_cn.html" rel="external"><img class="popphoto" src="images/footico.png" height="30px"></a><br>
-                <font size="1" font color="orange">i</font><font size="1" font color="#66B3FF">SCM</font><font size="1">: iTMS</font>
+                <font size="1" color="orange">i</font><font size="1" color="#66B3FF">SCM</font><font size="1">: iTMS</font>
             </p>
         </div><!-- /content -->
-
     </div><!-- /page -->
-
     <div data-role="page" id="resultView">
         <div data-role="content">
             <p align="center"><a href="#"><img class="popphoto" src="images/calenda.png" height="60px"></a></p>
             <p align="center">
-                <font size="1" font color="gray">道口预约</font><br>
+                <font size="1" color="gray">道口预约</font><br>
                 <b>创建临时预约</b>
             </p>
         </div>
-
-        <form>
-            <div style="padding:10px 20px;">
-
-
-                <p align="center">
-                    <a href="#"><img class="popphoto" src="images/done.png" height="50px"></a><br>
-                    <a href="#" data-role="button" class="ui-icon-nodisc" data-iconshadow="false" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">Check</a><br>
-                    <font size="1" color="green">创建成功</font><br><br>
-                    <font size="4" color="green"><b>预约号: <span data-bind="text:sucessfullAppointmentId"></span></b></font>
-                </p>
-
-            </div>
-        </form>
-
+        <div style="padding:10px 20px;">
+            <p align="center">
+                <a href="#"><img class="popphoto" src="images/done.png" height="50px"></a><br>
+                <a href="#" data-role="button" class="ui-icon-nodisc" data-iconshadow="false" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">Check</a><br>
+                <font size="1" color="green">创建成功</font><br><br>
+                <font size="4" color="green"><b>预约号: <span data-bind="text:sucessfullAppointmentId"></span></b></font>
+            </p>
+        </div>
         <div data-role="content">
             <p align="center">
                 <a href="itms_dock_editappmain_cn.html" rel="external"><img class="popphoto" src="images/footico.png" height="30px"></a><br>
-                <font size="1" font color="orange">i</font><font size="1" font color="#66B3FF">SCM</font><font size="1">: iTMS</font>
+                <font size="1" color="orange">i</font><font size="1" color="#66B3FF">SCM</font><font size="1">: iTMS</font>
             </p>
         </div><!-- /content -->
-
     </div><!-- /page -->
 
 </body>

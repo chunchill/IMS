@@ -49,9 +49,7 @@
                     });
                 }
             }, function () {
-                alert('error');
-                //TODO:if  error when commit
-
+                $("#popupMessage").popup("open");
             });
         };
 

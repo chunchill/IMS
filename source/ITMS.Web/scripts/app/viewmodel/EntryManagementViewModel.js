@@ -5,7 +5,7 @@
         self.alreadyEntryItems = ko.observableArray();//status:3
         self.alreadyArrivedItems = ko.observableArray();//status:2
         self.onWayItems = ko.observableArray();//status:1
-        self.selectedItem = { appId: ko.observable(), status: ko.observable(), title: ko.observable("title"), entryTime: ko.observable() };
+        self.selectedItem = { appId: ko.observable(), status: ko.observable(), title: ko.observable("title"), entryTime: ko.observable(), dock: ko.observable() };
 
         function addStatus(items, status) {
             items.forEach(function (item) {
@@ -27,39 +27,21 @@
         }
 
         var addTimelineForItem = function (option) {
+            alert('ok');
             IMS.datacontext.appointment.addAppTimeline(option).then(function (result) {
                 if (result.errorMessage !== '') {
-                    var temp = {};
-                    switch (self.selectedItem.status()) {
-                        case 3:
-                            temp = self.alreadyEntryItems();
-                            break;
-                        case 2:
-                            temp = self.alreadyArrivedItems();
-                            break;
-                        case 1:
-                            temp = self.onWayItems();
-                            break;
-                        default: break;
-                    }
-
-                    temp.map(function (rec) {
-                        if (rec.applicationId() == self.selectedItem.appId())
-                            rec.dock(option.dock);
-                    });
+                    $("#popupaction").popup("close");
                 }
             }, function () {
-                alert('error');
-                //TODO:if  error when commit
-
+                $("#popupMessage").popup("open");
             });
         };
 
-        self.onSubmit = function (dock, item) {
+        self.onEntry = function (item) {
             var date = new Date();
             var today = moment(date).format("YYYY-MM-DD");
             var now = moment(date).format("HH:mm:ss");
-            var option = { dock: dock, appId: self.selectedItem.appId(), newStatusDescription: self.selectedItem.entryTime(), date: today, time: now };
+            var option = { dock: self.selectedItem.dock(), appId: self.selectedItem.appId(), newStatusDescription: self.selectedItem.entryTime(), date: today, time: now };
             addTimelineForItem(option);
             $("#popupaction").popup("close");
         };
@@ -69,6 +51,7 @@
             if (item === undefined) return;
             self.selectedItem.appId(item.applicationId());
             self.selectedItem.status(item.status());
+            self.selectedItem.dock(item.dock());
             switch (self.selectedItem.status()) {
                 case 3:
                     self.selectedItem.title('登记出场时间');

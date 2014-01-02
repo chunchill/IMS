@@ -1,6 +1,5 @@
-﻿
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Entry Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,7 +27,7 @@
         <div data-role="content">
             <p align="center"><a href="#"><img class="popphoto" src="images/dock.png" height="60px" /></a></p>
             <p align="center">
-                <font size="1" font="" color="gray">道口预约</font><br />
+                <font size="1" color="gray">道口预约</font><br />
                 <b>编辑预约</b><br><br>
                 <font color="gray">出入场管理</font>
             </p>
@@ -61,20 +60,16 @@
                     <p align="center"><a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a></p>
                     <ul data-role="listview" data-inset="true" data-count-theme="d" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:onWayItems},jqmRefreshList:onWayItems"></ul>
                 </div>
-
                 <div data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
                     <h2>到达清单</h2>
                     <p align="center"><a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a></p>
                     <ul data-role="listview" data-inset="true" data-count-theme="d" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:alreadyArrivedItems},jqmRefreshList:alreadyArrivedItems"></ul>
                 </div>
-
                 <div data-role="collapsible" data-theme="c" data-content-theme="c" data-mini="true" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
                     <h2>已入场清单</h2>
                     <p align="center"><a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a></p>
                     <ul data-role="listview" data-inset="true" data-count-theme="d" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:alreadyEntryItems},jqmRefreshList:alreadyEntryItems"></ul>
                 </div>
-
-
             </div>
             <div data-role="content">
                 <p align="center"> <a href="#defaultpanel" data-rel="popup" class="ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">go</a></p>
@@ -83,7 +78,7 @@
             <!-- defaultpanel  -->
             <div data-role="panel" id="defaultpanel" data-theme="a" data-display="overlay" data-position="right">
                 <div class="panel-content">
-                    <p align="center">我的<font color="orange"><b>iTMS</b></font> <br /><font size="1" font="" color="gray">道口预约</font></p>
+                    <p align="center">我的<font color="orange"><b>iTMS</b></font> <br /><font size="1" color="gray">道口预约</font></p>
                     <ul data-role="listview" data-inset="true" class="ui-icon-alt">
                         <li data-icon="plus"><a href="itms_dock_newapp_cn.html" rel="external">创建预约</a></li>
                         <li data-icon="edit"><a href="itms_dock_editappmain_cn.html" rel="external">编辑预约</a></li>
@@ -98,21 +93,27 @@
                 <!-- /content wrapper for padding -->
             </div>
             <!-- /defaultpanel -->
-
             <div data-role="popup" id="popupaction" data-theme="d" data-overlay-theme="a">
                 <div style="padding:10px 20px;">
                     <p align="center">
                         <span data-bind="text:selectedItem.title"></span>
                         <input type="time" name="arr_time" id="s_arrtime" data-bind="value:selectedItem.entryTime">
                         <br>
-                        <button data-theme="b" data-icon="check" data-bind="click:onSubmit">登记</button>
+                        <button data-theme="b" data-icon="check" data-bind="click:onEntry">登记</button>
                     </p>
                 </div>
             </div>
-
-
+            <div data-role="popup" id="popupMessage" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+                <div data-role="header" data-theme="a" class="ui-corner-top">
+                    <h1>错误信息</h1>
+                </div>
+                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                    <p>对不起，您的操作出错了，请重试！</p>
+                    <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">确定</a>
+                </div>
+            </div>
             <div data-role="content">
-                <p align="center"><a href="#"><img class="popphoto" src="images/footico.png" height="30px" /></a><br /> <font size="1" font="" color="orange">i</font><font size="1" font="" color="#66B3FF">SCM</font><font size="1">: iTMS</font></p>
+                <p align="center"><a href="#"><img class="popphoto" src="images/footico.png" height="30px" /></a><br /> <font size="1" color="orange">i</font><font size="1" color="#66B3FF">SCM</font><font size="1">: iTMS</font></p>
             </div>
             <!-- /content -->
         </div>

@@ -27,7 +27,7 @@
         <div data-role="content">
             <p align="center"><a href="#"><img class="popphoto" src="images/dock.png" height="60px" /></a></p>
             <p align="center">
-                <font size="1" font="" color="gray">道口预约</font><br />
+                <font size="1" color="gray">道口预约</font><br />
                 <b>编辑预约</b><br><br>
                 <font color="gray">道口分配</font>
             </p>
@@ -53,18 +53,14 @@
                         <h2>已入场</h2>
                         <ul data-role="listview" data-inset="true" data-count-theme="a" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:alreadyEntryItems},jqmRefreshList:alreadyEntryItems"></ul>
                     </div>
-
                     <div data-role="collapsible" data-theme="c" data-content-theme="d" data-mini="true" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
                         <h2>已到达</h2>
                         <ul data-role="listview" data-inset="true" data-count-theme="b" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:alreadyArrivedItems},jqmRefreshList:alreadyArrivedItems"></ul>
                     </div>
-
                     <div data-role="collapsible" data-theme="c" data-content-theme="d" data-mini="true" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
                         <h2>在途</h2>
                         <ul data-role="listview" data-inset="true" data-count-theme="e" data-filter="true" data-bind="jqmTemplate: {name:'appointmentItem', foreach:onWayItems},jqmRefreshList:onWayItems"></ul>
                     </div>
-
-
                 </div>
             </form>
             <div data-role="content">
@@ -89,7 +85,6 @@
                 <!-- /content wrapper for padding -->
             </div>
             <!-- /defaultpanel -->
-
             <div data-role="popup" id="pop_dock" data-theme="d" data-overlay-theme="a">
                 <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
                     <li data-role="divider" data-theme="e">选择道口</li>
@@ -100,11 +95,17 @@
                     <li data-icon="delete"><a href="#" data-bind="click:closePopup">取消分配</a></li>
                 </ul>
             </div>
-
-
-
+            <div data-role="popup" id="popupMessage" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+                <div data-role="header" data-theme="a" class="ui-corner-top">
+                    <h1>错误信息</h1>
+                </div>
+                <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                    <p>对不起，您的操作出错了，请重试！</p>
+                    <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">确定</a>
+                </div>
+            </div>
             <div data-role="content">
-                <p align="center"><a href="#"><img class="popphoto" src="images/footico.png" height="30px" /></a><br /> <font size="1" font="" color="orange">i</font><font size="1" font="" color="#66B3FF">SCM</font><font size="1">: iTMS</font></p>
+                <p align="center"><a href="#"><img class="popphoto" src="images/footico.png" height="30px" /></a><br /> <font size="1" color="orange">i</font><font size="1" color="#66B3FF">SCM</font><font size="1">: iTMS</font></p>
             </div>
             <!-- /content -->
         </div>

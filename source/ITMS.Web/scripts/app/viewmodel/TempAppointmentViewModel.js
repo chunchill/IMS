@@ -66,11 +66,11 @@
         self.submit = function () {
             var option = {
                 key: 'key0001',
-                driver:self.carInformation.driver(),
+                driver: encodeURI(self.carInformation.driver()),
                 mobile: self.carInformation.mobile(),
                 vendorCode: self.deliveryOrderInformation.vendorCode(),
-                //vehicleType: self.carInformation.vehicleType(),
-                //vehicleLicense: self.carInformation.vehicleLicense(),
+                vehicleType: encodeURI(self.carInformation.vehicleType()),
+                vehicleLicense: encodeURI(self.carInformation.vehicleLicense()),
                 vehicleType: 'A',
                 vehicleLicense: '25865',
                 pDate: getCurrentformatedDateString(false),
@@ -84,8 +84,8 @@
                     self.sucessfullAppointmentId(result.errorMessage);
                 }
             }, function () {
-                //TODO:if  error when commit
-
+                $("#popupMessage").popup();
+                $("#popupMessage").popup("open");
             });
         };
 
