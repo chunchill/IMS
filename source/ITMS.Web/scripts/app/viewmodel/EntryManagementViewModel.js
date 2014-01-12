@@ -27,7 +27,6 @@
         }
 
         var addTimelineForItem = function (option) {
-            alert('ok');
             IMS.datacontext.appointment.addAppTimeline(option).then(function (result) {
                 if (result.errorMessage !== '') {
                     $("#popupaction").popup("close");

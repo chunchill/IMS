@@ -2,66 +2,88 @@
 (function (IMS, $, undefined) {
     IMS.AppointmentOverviewViewModel = function () {
         var self = this;
-        var self = this;
-        var centerPosition = new google.maps.LatLng(30.8793497, 121.8126685),
-        markerOrangeImage = {
-            url: 'http://maps.google.com/mapfiles/marker_orange.png',
-            // This marker is 20 pixels wide by 32 pixels tall.
-            size: new google.maps.Size(20, 32),
-            // The origin for this image is 0,0.
-            origin: new google.maps.Point(0, 0),
-            // The anchor for this image is the base of the flagpole at 0,32.
-            anchor: new google.maps.Point(0, 32)
-        },
-        buildInforWindowContent = function (lat, lng, mobile, bearing, speed, timeStamp) {
-            if (mobile === undefined && bearing === undefined && speed === undefined && timeStamp === undefined) return null;
-            var contentString = '<div id="content">' +
-                                  '<div id="siteNotice">' +
-                                  '</div>' +
-                                  '<div id="bodyContent">' +
-                                  '<p>最新位置: ' + lat + ',' + lng + '</p>' +
-                                  '<p>时间: ' + timeStamp + '</p>' +
-                                  '<p>速度: ' + speed + '; 方向: ' + bearing + '</p>' +
-                                  '<p> 手机: ' + mobile + '</p>' +
-                                  '</div>' +
-                                  '</div>';
-            return contentString;
-        },
-        buildDefaultMarkers = function (records) {
-            var markers = [];
-            ko.utils.arrayForEach(records, function (item) {
-                var marker = {};
-                marker.latitude = item.latLng.lat();
-                marker.longitude = item.latLng.lng();
-                marker.infoWindowContent = item.contentString;
-                marker.icon = markerOrangeImage;
-                markers.push(marker);
-            });
-            return markers;
-        },
-         buildMarker = function (record) {
-             var marker = {};
-             marker.latitude = record.latG;
-             marker.longitude = record.lngG;
-             marker.infoWindowContent = buildInforWindowContent(record.latG, record.lngG, record.mobile, record.bearing, record.speed, record.timestamp);
-             return marker;
-         };
-
-        self.allAppointmentMap = {
-            center: ko.observable(centerPosition),
-            markers: ko.observableArray(),
-            zoom: ko.observable(8),
-            polylinePoints: ko.observableArray()
-        };
-
+        self.todaysAppointmentList = ko.observableArray();
+        self.notStartedAppointmentList = ko.observableArray();
         self.onWayAppointmentList = ko.observableArray();
-        
+        self.alreadyArrivedList = ko.observableArray();
+        self.workingList = ko.observableArray();
+        self.appointmentDetailViewModel = new IMS.AppointmentDetailViewModel();
 
+
+        function addStatus(items, status) {
+            items.forEach(function (item) {
+                item.status = status;
+            });
+        }
 
         //public methods
         self.init = function () {
+            //bind all appointments
+            IMS.datacontext.appointment.getAllAppointments().then(function (result) {
+                if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        switch (+item.applicationStatus) {
+                            case 0:
+                                item.applicationStatus = '未开始';
+                                item.imageIco = 'images/notstarted.png'
+                                break;
+                            case 1:
+                                item.applicationStatus = '在途';
+                                item.imageIco = 'images/onway.png'
+                                break;
+                            case 2:
+                                item.applicationStatus = '已到达';
+                                item.imageIco = 'images/arrived.png'
+                                break;
+                            case 3:
+                                item.applicationStatus = '已入场';
+                                item.imageIco = 'images/alreadyEntry.png'
+                                break;
+                            case 4:
+                                item.applicationStatus = '作业';
+                                item.imageIco = 'images/working.png'
+                                break;
 
+                        }
+                    });
+                    self.todaysAppointmentList(result);
+                }
+            });
+
+            //bind not Started AppointmentList
+            IMS.datacontext.appointment.getNotStartedAppointments().then(function (result) {
+                if (result.errorMessage !== 'NO_DATA') {
+                    self.notStartedAppointmentList(result);
+                }
+            });
+
+            //bind OnWay Appointments
+            IMS.datacontext.appointment.getOnWayAppointments().then(function (result) {
+                if (result.errorMessage !== 'NO_DATA') {
+                    self.onWayAppointmentList(result);
+                }
+            });
+
+            //bind Already Arrived Appointments
+            IMS.datacontext.appointment.getAlreadyArrivedAppointments().then(function (result) {
+                if (result.errorMessage !== 'NO_DATA') {
+                    self.alreadyArrivedList(result);
+                }
+            });
+
+            //bind Working Appointments
+            IMS.datacontext.appointment.getWorkingAppointments().then(function (result) {
+                if (result.errorMessage !== 'NO_DATA') {
+                    self.workingList(result);
+                }
+            });
         };
+
+        self.onItemClick = function (item) {
+            self.appointmentDetailViewModel.init(item);
+            $.mobile.changePage("#detailPage", { transition: "flip", role: "dialog", closeBtn: "left", closeBtnText: "Fermer", overlayTheme: "e" });
+        };
+
 
 
     };

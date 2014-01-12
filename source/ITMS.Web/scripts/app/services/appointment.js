@@ -6,12 +6,27 @@ IMS.datacontext.appointment = (function ($, amplify) {
         amplify.request.define('getAppointmentByMobile', 'ajax', {
             url: serverUrl + '/application/getAppBriefListM.jsonp?mobile={mobile}&status={status}',
             dataType: 'jsonp',
-            type:'GET'
+            type: 'GET'
         });
 
         //getAllShortParkingAppointments by getAppBriefListS
         amplify.request.define('getAllShortParkingAppointments', 'ajax', {
             url: serverUrl + '/application/getAppBriefListS.jsonp?status=8',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
+
+        //getAllAppointments by getAppBriefListSA
+        amplify.request.define('getAllAppointments', 'ajax', {
+            url: serverUrl + '/application/getAppBriefListSA.jsonp?status[]=0,1,2,3,4',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
+        //getNotStartedAppointments by getAppBriefListS
+        amplify.request.define('getNotStartedAppointments', 'ajax', {
+            url: serverUrl + '/application/getAppBriefListS.jsonp?status=0',
             dataType: 'jsonp',
             type: 'GET'
         });
@@ -25,14 +40,22 @@ IMS.datacontext.appointment = (function ($, amplify) {
 
         //getAlreadyArrivedAppointments by getAppBriefListS
         amplify.request.define('getAlreadyArrivedAppointments', 'ajax', {
-            url: serverUrl + '/application/getAppBriefListS.jsonp?status=3',
+            url: serverUrl + '/application/getAppBriefListS.jsonp?status=2',
             dataType: 'jsonp',
             type: 'GET'
         });
 
         //getAlreadyEntryAppointments by getAppBriefListS
         amplify.request.define('getAlreadyEntryAppointments', 'ajax', {
-            url: serverUrl + '/application/getAppBriefListS.jsonp?status=2',
+            url: serverUrl + '/application/getAppBriefListS.jsonp?status=3',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
+
+        //getWorkingAppointments by getAppBriefListS
+        amplify.request.define('getWorkingAppointments', 'ajax', {
+            url: serverUrl + '/application/getAppBriefListS.jsonp?status=4',
             dataType: 'jsonp',
             type: 'GET'
         });
@@ -47,6 +70,27 @@ IMS.datacontext.appointment = (function ($, amplify) {
         //getAppItemList
         amplify.request.define('getAppItemList', 'ajax', {
             url: serverUrl + '/application/getAppItemList.jsonp?key={key}&appId={appId}',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
+        //getAppHeadAdm
+        amplify.request.define('getAppHeadAdm', 'ajax', {
+            url: serverUrl + '/application/getAppHeadAdm.jsonp?appId={appId}',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
+        //getAppItemListAdm
+        amplify.request.define('getAppItemListAdm', 'ajax', {
+            url: serverUrl + '/application/getAppItemListAdm.jsonp?appId={appId}',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
+        //getAppTimeline
+        amplify.request.define('getAppTimeline', 'ajax', {
+            url: serverUrl + '/location/getAppTimeline.jsonp?appId={appId}',
             dataType: 'jsonp',
             type: 'GET'
         });
@@ -72,7 +116,7 @@ IMS.datacontext.appointment = (function ($, amplify) {
         });
     },
 
-    defferedRequest = function (resourceId,option) {
+    defferedRequest = function (resourceId, option) {
         return $.Deferred(function (dfd) {
             amplify.request({
                 resourceId: resourceId,
@@ -83,7 +127,11 @@ IMS.datacontext.appointment = (function ($, amplify) {
         }).promise()
     },
 
-    getAppointmentByMobile =function(option){
+    getAllAppointments = function (option) {
+        return defferedRequest('getAllAppointments', option)
+    };
+
+    getAppointmentByMobile = function (option) {
         return defferedRequest('getAppointmentByMobile', option)
     };
 
@@ -91,10 +139,14 @@ IMS.datacontext.appointment = (function ($, amplify) {
         return defferedRequest('getAllShortParkingAppointments', option)
     };
 
+    getNotStartedAppointments = function (option) {
+        return defferedRequest('getNotStartedAppointments', option)
+    };
+
     getOnWayAppointments = function (option) {
         return defferedRequest('getOnWayAppointments', option)
     };
-    
+
     getAlreadyArrivedAppointments = function (option) {
         return defferedRequest('getAlreadyArrivedAppointments', option)
     };
@@ -103,12 +155,28 @@ IMS.datacontext.appointment = (function ($, amplify) {
         return defferedRequest('getAlreadyEntryAppointments', option)
     };
 
+    getWorkingAppointments = function (option) {
+        return defferedRequest('getWorkingAppointments', option)
+    };
+
     getAppointmentHead = function (option) {
         return defferedRequest('getAppHead', option)
     };
 
     getAppointmentDeliveryItems = function (option) {
         return defferedRequest('getAppItemList', option)
+    };
+
+    getAppointmentHeadForAdmin = function (option) {
+        return defferedRequest('getAppHeadAdm', option)
+    };
+
+    getAppTimeline = function (option) {
+        return defferedRequest('getAppTimeline', option)
+    };
+
+    getAppointmentDeliveryItemsForAdmin = function (option) {
+        return defferedRequest('getAppItemListAdm', option)
     };
 
     excuteAppointment = function (option) {
@@ -127,16 +195,22 @@ IMS.datacontext.appointment = (function ($, amplify) {
 
     //public methods
     return {
+        getAllAppointments: getAllAppointments,
         getAppointmentByMobile: getAppointmentByMobile,
         getAllShortParkingAppointments: getAllShortParkingAppointments,
+        getNotStartedAppointments: getNotStartedAppointments,
         getOnWayAppointments: getOnWayAppointments,
         getAlreadyArrivedAppointments: getAlreadyArrivedAppointments,
-        getAlreadyEntryAppointments:getAlreadyEntryAppointments,
+        getAlreadyEntryAppointments: getAlreadyEntryAppointments,
+        getWorkingAppointments: getWorkingAppointments,
         getAppointmentHead: getAppointmentHead,
         getAppointmentDeliveryItems: getAppointmentDeliveryItems,
+        getAppointmentHeadForAdmin: getAppointmentHeadForAdmin,
+        getAppointmentDeliveryItemsForAdmin: getAppointmentDeliveryItemsForAdmin,
         excuteAppointment: excuteAppointment,
         createNewAppointment: createNewAppointment,
-        addAppTimeline: addAppTimeline
+        addAppTimeline: addAppTimeline,
+        getAppTimeline: getAppTimeline
     }
 }(jQuery, amplify));
 

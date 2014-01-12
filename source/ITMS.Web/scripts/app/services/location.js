@@ -9,6 +9,14 @@ IMS.datacontext.location = (function ($, amplify) {
             dataType: 'jsonp',
             type: 'GET'
         });
+
+        //get the latest position for all the cars
+        amplify.request.define('getLastLocGeoAllForBoard', 'ajax', {
+            url: serverUrl + '/location/getLastLocGeoAllS.jsonp?status=1',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
         //get the latest position for the query item
         amplify.request.define('getLastLocGeo', 'ajax', {
             url: serverUrl + '/location/getLastLocGeo.jsonp?appId={appId}',
@@ -39,6 +47,10 @@ IMS.datacontext.location = (function ($, amplify) {
         return defferedRequest('getLastLocGeoAll', option)
     };
 
+    getLastLocGeoAllForBoard = function (option) {
+        return defferedRequest('getLastLocGeoAllForBoard', option)
+    };
+
     getLastLocGeo = function (option) {
         return defferedRequest('getLastLocGeo', option)
     };
@@ -51,9 +63,9 @@ IMS.datacontext.location = (function ($, amplify) {
 
     return {
         getLastLocGeoAll: getLastLocGeoAll,
-        getLastLocGeo:getLastLocGeo,
-        getLocGeoAll: getLocGeoAll
-     
+        getLastLocGeo: getLastLocGeo,
+        getLocGeoAll: getLocGeoAll,
+        getLastLocGeoAllForBoard: getLastLocGeoAllForBoard
     }
 }(jQuery, amplify));
 

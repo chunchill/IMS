@@ -110,6 +110,7 @@
         }));
 
         google.maps.event.addListener(_mapInstance, 'dragstart', function () {
+            google.maps.event.trigger(_mapInstance, "resize");
             self.dragging = true;
         });
         google.maps.event.addListener(_mapInstance, 'idle', function () {
@@ -263,7 +264,7 @@
             var options = valueAccessor() || {},
                 bindings = { options: options };
 
-            forEach(['handlers', 'draggable', 'zoom', 'center', 'markers', 'mapTypeId', 'fit', 'polylinePoints'], function (binding) {
+            forEach(['handlers', 'draggable', 'zoom', 'center', 'markers', 'mapTypeId', 'fit', 'polylinePoints', 'requireResize'], function (binding) {
                 if (allBindings[binding])
                     bindings[binding] = allBindings[binding];
                 if (bindings.options[binding])
