@@ -156,7 +156,15 @@
                     <a href="#" id="btnConfirmExcute" data-role="button" data-bind="click:excuteAppointment" data-inline="true" data-icon="check" data-theme="b" data-mini="true">确认</a>
                 </div>
         </div>
-
+        <div data-role="popup" id="popupMessage" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+            <div data-role="header" data-theme="a" class="ui-corner-top">
+                <h1>错误信息</h1>
+            </div>
+            <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+                <p>对不起，您的操作出错了，请重试！</p>
+                <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">确定</a>
+            </div>
+        </div>
 
         <div data-role="content">
             <p align="center">

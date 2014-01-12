@@ -83,8 +83,13 @@
 
             //bind the appointment header
             IMS.datacontext.appointment.getAppointmentHeadForAdmin(option).then(function (result) {
-                if (result.errorMessage !== 'NO_DATA')
+                if (result.errorMessage !== 'NO_DATA') {
+                    result.driverName = decodeURI(result.driverName);
+                    result.vehicleType = decodeURI(result.vehicleType);
+                    result.vehicleLicenseNo = decodeURI(result.vehicleLicenseNo);
                     ko.mapping.fromJS(result, {}, self.basicInformation);
+                }
+               
                 self.applicationId(result.applicationId);
                 self.applicationStatus(result.applicationStatus);
             });
