@@ -150,7 +150,7 @@
                     <p align="center"><a href="#popqrcode" data-rel="popup" data-position-to="window" data-transition="fade"><font size="4" color="gray">预约号: <font size="4" color="gray"><strong data-bind="text:applicationId"></strong></font></font></a><br></p>
                     <div data-role="popup" id="popqrcode" data-overlay-theme="a" data-theme="d" data-corners="false">
                         <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-                        <img src="http://chart.apis.google.com/chart?cht=qr&chs=320x320&chl=A1217V213&choe=UTF-8&chld=L">
+                        <img data-bind="attr:{src:crCode}">
                     </div>
                     <fieldset data-role="collapsible" data-theme="d" data-content-theme="d" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
                         <legend>基本信息</legend>

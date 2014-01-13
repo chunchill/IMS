@@ -50,7 +50,7 @@
                             <p>货量:<span data-bind="text:deliveryVolSum"></span></p>
                             <p>计划日期:<span data-bind="text:planedDevelieryDate"></span></p>
                             <p>计划时间段:<span data-bind="text:planedEarliestDevelieryDate"></span>-<span data-bind="text:planedLatestDevelieryDate"></span></p>
-                            <p><span data-bind="text:vendorCode"></span></p>
+                            <p>供应商:<span data-bind="text:vendorCode"></span></p>
                             <p><font color="gray">道口:<span data-bind="text:dock"></span></font></p>
                         </a>
                     </li>
@@ -94,12 +94,22 @@
             </div>
             <!-- /defaultpanel -->
             <div data-role="popup" id="popupaction" data-theme="d" data-overlay-theme="a">
-                <div style="padding:10px 20px;">
+                <div data-role="header" data-theme="a" class="ui-corner-top">
+                    <h1>请确定信息</h1>
+                </div>
+                <div data-role="content">
                     <p align="center">
-                        <span data-bind="text:selectedItem.title"></span>
-                        <input type="time" name="arr_time" id="s_arrtime" data-bind="value:selectedItem.entryTime">
-                        <br>
-                        <button data-theme="b" data-icon="check" data-bind="click:onEntry">登记</button>
+                    <p><font size="3"><strong data-bind="text:selectedItem.appId"></strong></font></p>
+                    <p>车牌: <span data-bind="text:selectedItem.vehicleLicense"></span></p>
+                    <p>手机:<span data-bind="text:selectedItem.mobile"></span></p>
+                    <p>货量:<span data-bind="text:selectedItem.deliveryVolSum"></span></p>
+                    <p>计划日期:<span data-bind="text:selectedItem.planedDevelieryDate"></span></p>
+                    <p>计划时间段:<span data-bind="text:selectedItem.planedEarliestDevelieryDate"></span>-<span data-bind="text:selectedItem.planedLatestDevelieryDate"></span></p>
+                    <span data-bind="text:selectedItem.title"></span>
+                    <input type="time" name="arr_time" id="s_arrtime" data-bind="value:selectedItem.entryTime">
+                    <br>
+                    <button data-theme="b" data-icon="check" data-inline="true" data-bind="click:onEntry">登记</button>
+                    <button data-theme="b" data-icon="delete" data-inline="true" data-bind="click:closePopup">取消</button>
                     </p>
                 </div>
             </div>

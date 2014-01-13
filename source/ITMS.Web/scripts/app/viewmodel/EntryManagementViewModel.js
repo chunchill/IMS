@@ -5,7 +5,19 @@
         self.alreadyEntryItems = ko.observableArray();//status:3
         self.alreadyArrivedItems = ko.observableArray();//status:2
         self.onWayItems = ko.observableArray();//status:1
-        self.selectedItem = { appId: ko.observable(), status: ko.observable(), title: ko.observable("title"), entryTime: ko.observable(), dock: ko.observable() };
+        self.selectedItem = {
+            appId: ko.observable(),
+            status: ko.observable(),
+            title: ko.observable("title"),
+            entryTime: ko.observable(),
+            dock: ko.observable(),
+            vehicleLicense: ko.observable(),
+            mobile: ko.observable(),
+            deliveryVolSum: ko.observable(),
+            planedDevelieryDate: ko.observable(),
+            planedEarliestDevelieryDate: ko.observable(),
+            planedLatestDevelieryDate: ko.observable()
+        };
 
         function addStatus(items, status) {
             items.forEach(function (item) {
@@ -40,8 +52,9 @@
             var date = new Date();
             var today = moment(date).format("YYYY-MM-DD");
             var now = moment(date).format("HH:mm:ss");
-            var option = { dock: self.selectedItem.dock(), appId: self.selectedItem.appId(), newStatusDescription: self.selectedItem.entryTime(), date: today, time: now };
+            var option = { dock: self.selectedItem.dock(), appId: self.selectedItem.appId(), newStatusDescription: '', date: today, time: self.selectedItem.entryTime() };
             addTimelineForItem(option);
+            self.init();
             $("#popupaction").popup("close");
         };
 
@@ -51,6 +64,12 @@
             self.selectedItem.appId(item.applicationId());
             self.selectedItem.status(item.status());
             self.selectedItem.dock(item.dock());
+            self.selectedItem.vehicleLicense(item.vehicleLicense());
+            self.selectedItem.mobile(item.mobile());
+            self.selectedItem.deliveryVolSum(item.deliveryVolSum());
+            self.selectedItem.planedDevelieryDate(item.planedDevelieryDate());
+            self.selectedItem.planedEarliestDevelieryDate(item.planedEarliestDevelieryDate());
+            self.selectedItem.planedLatestDevelieryDate(item.planedLatestDevelieryDate());
             switch (self.selectedItem.status()) {
                 case 3:
                     self.selectedItem.title('登记出场时间');
@@ -76,7 +95,7 @@
         };
 
 
-        self.init = function (mobile) {
+        self.init = function () {
             IMS.datacontext.appointment.getOnWayAppointments().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
                     addStatus(result, 1);

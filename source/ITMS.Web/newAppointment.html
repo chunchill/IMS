@@ -18,10 +18,10 @@
     <script src="scripts/lib/moment.min.js"></script>
     <script src="scripts/app/staticdata.js"></script>
     <script src="scripts/app/services/appointment.js"></script>
-    <script src="scripts/app/viewmodel/TempAppointmentViewModel.js"></script>
+    <script src="scripts/app/viewmodel/NewAppointmentViewModel.js"></script>
     <script src="scripts/app/ko.extentions.js"></script>
     <script src="scripts/app/app.js"></script>
-    <script src="scripts/app/tempAppointmentApp.js"></script>
+    <script src="scripts/app/newAppointmentApp.js"></script>
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 <body>
@@ -167,6 +167,12 @@
                 <legend>预约信息待提交</legend>
                 <div style="padding:10px 10px;">
                     <div data-role="fieldcontain">
+                        <label for="txdr">到达日期:</label>
+                        <input type="date" name="pETime" id="pETime" data-bind="value:pDate">
+                        <label for="txdr">最早到达时间:</label>
+                        <input type="time" name="pETime" id="pETime" data-bind="value:pETime">
+                        <label for="txdr">最晚到达时间:</label>
+                        <input type="time" name="pLTime" id="pLTime" data-bind="value:pLTime">
                         <label for="txdr">驾驶员:</label>
                         <input type="text" name="txdr" id="txdr" value="Driver Name" disabled="disabled" data-mini="true" data-bind="value:carInformation.driver">
                         <label for="txmb">手机:</label>

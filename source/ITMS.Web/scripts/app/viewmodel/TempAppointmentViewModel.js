@@ -5,18 +5,49 @@
     IMS.TempAppointmentViewModel = function () {
         var self = this;
         self.carInformation = {
-            driver : ko.observable(),
-            mobile : ko.observable(),
+            validationMsg: ko.observable(''),
+            driver: ko.observable(),
+            mobile: ko.observable(),
             vehicleType: ko.observable(),
-            vehicleLicenseNumber:ko.observable(),
-            vehicleAbbrev:ko.observable(),
-            vehicleTypeOptions : IMS.staticData.carTypes,
+            vehicleLicenseNumber: ko.observable(),
+            vehicleAbbrev: ko.observable(),
+            vehicleTypeOptions: IMS.staticData.carTypes,
             provincesOptions: IMS.staticData.provinceAbbreviation,
             //the next step click action
-             nextStepToAddDeliverOrderPage : function () {
-                $.mobile.changePage("#theSecondStepView");
+            nextStepToAddDeliverOrderPage: function () {
+                if (self.validation()) {
+                    $.mobile.changePage("#theSecondStepView");
+                }
+                else {
+                    $("#validationMsg").popup();
+                    $("#validationMsg").popup('open');
+                }
             }
+
         };
+
+        self.validation = function () {
+            var message = '';
+            var result = true;
+            if (self.carInformation.driver() == undefined || self.carInformation.driver() == '') {
+                message = '<li>请输入驾驶员信息;</li>'
+                result = false;
+            }
+
+            if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(self.carInformation.mobile()))) {
+
+                message += '<li>请输入正确的手机号码;</li>'
+                result = false;
+            }
+
+            if (self.carInformation.vehicleLicenseNumber() == undefined || self.carInformation.vehicleLicenseNumber() == '') {
+                message += '<li>请输入车牌号;</li>'
+                result = false;
+            }
+            self.carInformation.validationMsg(message);
+            return result;
+        }
+
 
         self.carInformation.vehicleLicense = ko.computed(function () {
             return self.carInformation.vehicleAbbrev() + self.carInformation.vehicleLicenseNumber();
@@ -24,16 +55,34 @@
 
 
         self.deliveryOrderInformation = {
+            validationMsgOfDelivery: ko.observable(''),
             vendorCode: ko.observable(),
             deliveryNoteIdToAdd: ko.observable(),
             deliveryNoteId: ko.observableArray([])
         };
         self.deliveryOrderInformation.deliveryNoteCount = ko.observable(0);
 
+        var validationDeliveryItem = function () {
+            var itemToAdd = self.deliveryOrderInformation.deliveryNoteIdToAdd();
+            if (itemToAdd == undefined) {
+                self.deliveryOrderInformation.validationMsgOfDelivery('请输入交货单号码！')
+                $('#validationMsgOfDelivery').popup('open');
+                return false;
+            } else {
+                if (ko.utils.arrayIndexOf(self.deliveryOrderInformation.deliveryNoteId(), itemToAdd) != -1) {
+                    self.deliveryOrderInformation.validationMsgOfDelivery('你输入的单号已经存在！')
+                    $('#validationMsgOfDelivery').popup('open');
+                    return false;
+                }
+            }
+            return true;
+        };
         //add one deliveryNote to the list
         self.deliveryOrderInformation.addOneDeliveryNoteId = function () {
-            self.deliveryOrderInformation.deliveryNoteId.push(self.deliveryOrderInformation.deliveryNoteIdToAdd());
-            self.deliveryOrderInformation.deliveryNoteCount(self.deliveryOrderInformation.deliveryNoteId().length);
+            if (validationDeliveryItem()) {
+                self.deliveryOrderInformation.deliveryNoteId.push(self.deliveryOrderInformation.deliveryNoteIdToAdd());
+                self.deliveryOrderInformation.deliveryNoteCount(self.deliveryOrderInformation.deliveryNoteId().length);
+            }
         };
 
         //remove one deliveryNote from the list
@@ -45,8 +94,23 @@
             $.mobile.changePage("#theFirstStepView");
         };
 
+        var finalValidation = function () {
+            if (self.deliveryOrderInformation.vendorCode() == undefined || self.deliveryOrderInformation.vendorCode() == '') {
+                self.deliveryOrderInformation.validationMsgOfDelivery('供应商代码不可以为空！')
+                $('#validationMsgOfDelivery').popup('open');
+                return false;
+            }
+            if (self.deliveryOrderInformation.deliveryNoteCount() == 0) {
+                self.deliveryOrderInformation.validationMsgOfDelivery('请至少输入一条交货单！')
+                $('#validationMsgOfDelivery').popup('open');
+                return false;
+            }
+            return true;
+        }
+
         self.nextStepToSubmitPage = function () {
-            $.mobile.changePage("#theThirdStepView");
+            if (finalValidation())
+                $.mobile.changePage("#theThirdStepView");
         };
 
         self.goBackToDeliveryOrderInformation = function () {
@@ -55,8 +119,7 @@
 
         var getCurrentformatedDateString = function (withTime) {
             var date = new Date();
-            if (withTime)
-            {
+            if (withTime) {
                 date.setHours(23, 59, 59);
                 return moment(date).format("YYYY-MM-DD HH:mm:ss");
             }
@@ -71,8 +134,6 @@
                 vendorCode: self.deliveryOrderInformation.vendorCode(),
                 vehicleType: encodeURI(self.carInformation.vehicleType()),
                 vehicleLicense: encodeURI(self.carInformation.vehicleLicense()),
-                vehicleType: 'A',
-                vehicleLicense: '25865',
                 pDate: getCurrentformatedDateString(false),
                 pETime: getCurrentformatedDateString(true),
                 pLTime: getCurrentformatedDateString(true),
@@ -89,7 +150,7 @@
             });
         };
 
-      
+
     }
     return IMS.TempAppointmentViewModel;
 })(window.IMS = window.IMS || {}, jQuery);
