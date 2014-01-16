@@ -58,7 +58,8 @@
                     <p>货量:<span data-bind="text:deliveryVolSum"></span></p>
                     <p>计划日期:<span data-bind="text:planedDevelieryDate"></span></p>
                     <p>计划时间段:<span data-bind="text:planedEarliestDevelieryDate"></span>-<span data-bind="text:planedLatestDevelieryDate"></span></p>
-                    <span class="ui-li-count"><span data-bind="text:deliveryVolSum"></span></span>
+                    <p>道口:<span data-bind="text:dock"></span></p>
+                    <span class="ui-li-count"><span data-bind="text:deliveryCount"></span></span>
                     <input type="hidden" data-bind="value:status" />
                 </a>
             </li>
@@ -116,6 +117,8 @@
                 <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true">
                     <legend>基本信息</legend>
                     <div data-role="fieldcontain" data-bind="with:basicInformation">
+                        <label for="txdr">供应商:</label>
+                        <input type="text" name="txdr" id="txdr" data-bind="value:vendorCode" disabled="disabled" data-mini="true" />
                         <label for="txdr">司机:</label>
                         <input type="text" name="txdr" id="txdr" data-bind="value:driverName" disabled="disabled" data-mini="true" />
                         <label for="txmb">手机:</label>

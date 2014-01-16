@@ -12,6 +12,7 @@
             IMS.datacontext.user.login(option).then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
                     sessionStorage.userInfo = JSON.stringify(result);
+                    window.location.replace('newAppointment.html')
                 }
                 else $("#popupMessage").popup("open");
 

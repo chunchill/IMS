@@ -128,7 +128,7 @@
         self.sucessfullAppointmentId = ko.observable();
         self.submit = function () {
             var option = {
-                key: 'key0001',
+                key: IMS.util.getUserInfo().key,
                 driver: encodeURI(self.carInformation.driver()),
                 mobile: self.carInformation.mobile(),
                 vendorCode: self.deliveryOrderInformation.vendorCode(),
@@ -140,7 +140,7 @@
                 deliveryNoteId: self.deliveryOrderInformation.deliveryNoteId()
             };
             IMS.datacontext.appointment.createNewAppointment(option).then(function (result) {
-                if (result.errorMessage !== '') {
+                if (result.errorMessage !== '' && result.errorMessage !== undefined) {
                     $.mobile.changePage("#resultView");
                     self.sucessfullAppointmentId(result.errorMessage);
                 }

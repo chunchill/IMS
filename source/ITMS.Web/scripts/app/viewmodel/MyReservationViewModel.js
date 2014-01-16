@@ -22,6 +22,11 @@
             var option = { mobile: mobile, status: '0' };
             IMS.datacontext.appointment.getAppointmentByMobile(option).then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    })
                     addStatus(result, true);
                     self.planedItems(result)
                 }
@@ -30,6 +35,11 @@
             option = { mobile: mobile, status: '1' };
             IMS.datacontext.appointment.getAppointmentByMobile(option).then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    })
                     addStatus(result, false);
                     self.unPlanedItems(result);
                 }
