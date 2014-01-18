@@ -92,6 +92,11 @@
             //bind the short parking appointment lists
             IMS.datacontext.appointment.getAllShortParkingAppointments().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    })
                     self.allShortParkingAppointmentBriefItems(result)
                 }
             });

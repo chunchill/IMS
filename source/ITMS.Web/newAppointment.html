@@ -23,6 +23,13 @@
     <script src="scripts/app/ko.extentions.js"></script>
     <script src="scripts/app/app.js"></script>
     <script src="scripts/app/newAppointmentApp.js"></script>
+    <script type="text/javascript">
+        function getFromAndroid(str) {    //接收来自android的数据
+            document.getElementById("autocompleteDN").innerHTML = str;
+            //如果要抓ListView的filter，如果是页面上的第一个就按照下面这样写，类似第二个就是.eq(1)
+            //$("input[data-type='search']").eq(0).val(str);
+        }
+    </script>
     <link rel="shortcut icon" href="favicon.ico">
 </head>
 <body>
