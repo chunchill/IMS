@@ -48,14 +48,71 @@
             });
         };
 
+
+
         self.onEntry = function (item) {
             var date = new Date();
             var today = moment(date).format("YYYY-MM-DD");
             var now = moment(date).format("HH:mm:ss");
-            var option = { dock: self.selectedItem.dock(), appId: self.selectedItem.appId(), newStatusDescription: '', date: today, time: self.selectedItem.entryTime() };
-            addTimelineForItem(option);
-            self.init();
-            $("#popupaction").popup("close");
+            var newStatusDescription = '';
+            switch (self.selectedItem.status()) {
+                case 1:
+                    newStatusDescription = '2';
+                    break;
+                case 2:
+                    newStatusDescription = '3';
+                    break;
+                case 3:
+                    newStatusDescription = '';
+                    break;
+            }
+            var option = { dock: self.selectedItem.dock(), appId: self.selectedItem.appId(), newStatusDescription: newStatusDescription, date: today, time: self.selectedItem.entryTime() + ':00' };
+            IMS.datacontext.appointment.addAppTimeline(option).then(function (result) {
+                if (result.errorMessage !== '') {
+                    //self.init();
+                    $.when(IMS.datacontext.appointment.getOnWayAppointments(), IMS.datacontext.appointment.getAlreadyArrivedAppointments(), IMS.datacontext.appointment.getAlreadyEntryAppointments()).done(function (result1, result2, result3) {
+                        if (result1[1] !== 'NO_DATA') {
+                            ko.utils.arrayForEach(result1[0], function (item) {
+                                item.driverName = decodeURI(item.driverName);
+                                item.vehicleType = decodeURI(item.vehicleType);
+                                item.vehicleLicense = decodeURI(item.vehicleLicense);
+                            })
+                            addStatus(result1[0], 1);
+                            var list = convertToObservable(result1[0]);
+                            self.onWayItems(list);
+                        }
+
+                        if (result2[1] !== 'NO_DATA') {
+                            ko.utils.arrayForEach(result2[0], function (item) {
+                                item.driverName = decodeURI(item.driverName);
+                                item.vehicleType = decodeURI(item.vehicleType);
+                                item.vehicleLicense = decodeURI(item.vehicleLicense);
+                            })
+                            addStatus(result2[0], 1);
+                            var list = convertToObservable(result2[0]);
+                            self.alreadyArrivedItems(list);
+                        }
+
+                        if (result3[1] !== 'NO_DATA') {
+                            ko.utils.arrayForEach(result3[0], function (item) {
+                                item.driverName = decodeURI(item.driverName);
+                                item.vehicleType = decodeURI(item.vehicleType);
+                                item.vehicleLicense = decodeURI(item.vehicleLicense);
+                            })
+                            addStatus(result3[0], 1);
+                            var list = convertToObservable(result3[0]);
+                            self.alreadyEntryItems(list);
+                        }
+
+
+                        $("#popupaction").popup("close");
+                    });
+                }
+            }, function () {
+                $("#popupMessage").popup("open");
+            });
+
+
         };
 
         //--public functions
