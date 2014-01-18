@@ -50,7 +50,7 @@
         </div>
     </div><!-- /page -->
 
-    <div data-role="page" id="theFirstStepView" data-bind="with:carInformation">
+    <div data-role="page" id="theFirstStepView">
         <div data-role="popup" id="validationMsg" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
             <div data-role="header" data-theme="a" class="ui-corner-top">
                 <h1>错误信息</h1>
@@ -71,7 +71,7 @@
         <div style="padding:10px 20px;">
             <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true" data-collapsed="false">
                 <legend>步骤1/2: 车辆信息</legend>
-                <div style="padding:10px 10px;">
+                <div style="padding:10px 10px;" data-bind="with:carInformation">
                     <label for="un" class="ui-hidden-accessible">driver name:</label>
                     <input type="text" name="un" id="un" value="" placeholder="驾驶员" data-theme="e" data-inline="true" data-bind="value:driver" required>
                     <label for="mb" class="ui-hidden-accessible">mobile:</label>
@@ -87,11 +87,18 @@
                     <label for="lc" class="ui-hidden-accessible">license:</label>
                     <input type="text" name="lc" id="lc" value="" placeholder="车牌号" data-theme="e" data-inline="true" data-bind="value:vehicleLicenseNumber">
                 </div>
+                <div style="padding:10px 20px;">
+                    <label for="appdate"><font color="gray">预约送货日期及时间</font></label>
+                    <input type="date" name="pDate" id="pDate" data-bind="value:pDate" placeholder="预约日期" data-theme="e" data-inline="true">
+                    <input type="time" name="pETime" id="pETime" data-bind="value:pETime" placeholder="最早到达时间" data-theme="e" data-inline="true" data-mini="true">
+                    <input type="time" name="pLTime" id="pLTime" data-bind="value:pLTime" placeholder="最晚达到事件" data-theme="e" data-inline="true" data-mini="true">
+                </div>
             </fieldset>
             <p align="center">
                 <a href="#" data-role="button" data-inline="true" data-icon="arrow-r" data-theme="d" data-bind="click:nextStepToAddDeliverOrderPage">下一步</a>
             </p>
         </div>
+      
         <div data-role="content">
             <p align="center">
                 <a href="itms_dock_editappmain_cn.html" rel="external"><img class="popphoto" src="images/footico.png" height="30px"></a><br>
@@ -169,11 +176,11 @@
                 <div style="padding:10px 10px;">
                     <div data-role="fieldcontain">
                         <label for="txdr">到达日期:</label>
-                        <input type="date" name="pETime" id="pETime" data-bind="value:pDate">
+                        <input type="date" name="pETime" id="pETime" disabled="disabled" data-mini="true" data-bind="value:pDate">
                         <label for="txdr">最早到达时间:</label>
-                        <input type="time" name="pETime" id="pETime" data-bind="value:pETime">
+                        <input type="time" name="pETime" id="pETime" disabled="disabled" data-mini="true" data-bind="value:pETime">
                         <label for="txdr">最晚到达时间:</label>
-                        <input type="time" name="pLTime" id="pLTime" data-bind="value:pLTime">
+                        <input type="time" name="pLTime" id="pLTime" disabled="disabled" data-mini="true" data-bind="value:pLTime">
                         <label for="txdr">驾驶员:</label>
                         <input type="text" name="txdr" id="txdr" value="Driver Name" disabled="disabled" data-mini="true" data-bind="value:carInformation.driver">
                         <label for="txmb">手机:</label>

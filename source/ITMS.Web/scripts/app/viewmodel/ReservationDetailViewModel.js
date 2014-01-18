@@ -23,7 +23,7 @@
             planedEarliestDevelieryDate: ko.observable(),
             planedLatestDevelieryDate: ko.observable(),
         };
-
+        self.sucessfullAppointmentId = ko.observable();
         self.init = function (orderItem) {
             //var option = { appId: orderItem.applicationId, key: IMS.util.getUserInfo().key };
             var option = { appId: orderItem.applicationId, key: 'key0001' };
@@ -48,14 +48,14 @@
                 }
             });
         };
-
         self.excuteAppointment = function (data) {
             var option = { appId: +self.applicationId(), key: 'key0001', action: 1 };
             //var option = { appId: +self.applicationId(), key: IMS.util.getUserInfo().key, action: 1 };
             IMS.datacontext.appointment.excuteAppointment(option).then(function (result) {
                 //alert(JSON.stringify(result));
                 $('#popupconfirm').popup('close');
-                $.mobile.changePage("#driverInputMobileView");
+                self.sucessfullAppointmentId(option.appId);
+                $.mobile.changePage("#resultView");
             }, function (result) {
                 //alert(JSON.stringify(result))
                 $('#popupMessage').popup();

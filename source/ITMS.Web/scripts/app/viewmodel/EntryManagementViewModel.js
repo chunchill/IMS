@@ -63,7 +63,7 @@
                     newStatusDescription = '3';
                     break;
                 case 3:
-                    newStatusDescription = '';
+                    newStatusDescription = '4';
                     break;
             }
             var option = { dock: self.selectedItem.dock(), appId: self.selectedItem.appId(), newStatusDescription: newStatusDescription, date: today, time: self.selectedItem.entryTime() + ':00' };
@@ -71,7 +71,7 @@
                 if (result.errorMessage !== '') {
                     //self.init();
                     $.when(IMS.datacontext.appointment.getOnWayAppointments(), IMS.datacontext.appointment.getAlreadyArrivedAppointments(), IMS.datacontext.appointment.getAlreadyEntryAppointments()).done(function (result1, result2, result3) {
-                        if (result1[1] !== 'NO_DATA') {
+                        if (result1[0] !== undefined && result1[0].errorMessage !== 'NO_DATA') {
                             ko.utils.arrayForEach(result1[0], function (item) {
                                 item.driverName = decodeURI(item.driverName);
                                 item.vehicleType = decodeURI(item.vehicleType);
@@ -82,7 +82,7 @@
                             self.onWayItems(list);
                         }
 
-                        if (result2[1] !== 'NO_DATA') {
+                        if (result2[0] !== undefined && result2[0].errorMessage !== 'NO_DATA') {
                             ko.utils.arrayForEach(result2[0], function (item) {
                                 item.driverName = decodeURI(item.driverName);
                                 item.vehicleType = decodeURI(item.vehicleType);
@@ -93,7 +93,7 @@
                             self.alreadyArrivedItems(list);
                         }
 
-                        if (result3[1] !== 'NO_DATA') {
+                        if (result3[0] !== undefined && result3[0].errorMessage !== 'NO_DATA') {
                             ko.utils.arrayForEach(result3[0], function (item) {
                                 item.driverName = decodeURI(item.driverName);
                                 item.vehicleType = decodeURI(item.vehicleType);

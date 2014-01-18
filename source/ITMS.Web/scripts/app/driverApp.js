@@ -17,6 +17,7 @@ $(document).ready(function () {
     ko.applyBindings(driverInputMobileModel, document.getElementById("driverInputMobileView"));
     ko.applyBindings(myreservationModel, document.getElementById("myReservationView"));
     ko.applyBindings(reservationDetailModel, document.getElementById("reservationDetailView"));
+    ko.applyBindings(reservationDetailModel, document.getElementById("resultView"));
 
   
 });

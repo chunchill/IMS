@@ -3,8 +3,15 @@
 /// <reference path="../staticdata.js" />
 (function (IMS, $, undefined) {
     IMS.NewAppointmentViewModel = function () {
-        var self = this;
-
+        var self = this,
+            getVendorCode = function () {
+                var userInfo = IMS.util.getUserInfo();
+                if (userInfo == null || userInfo == undefined) {
+                    return '';
+                } else {
+                    return userInfo.venderCode;
+                }
+            };
         self.carInformation = {
             validationMsg: ko.observable(''),
             driver: ko.observable(),
@@ -13,18 +20,17 @@
             vehicleLicenseNumber: ko.observable(),
             vehicleAbbrev: ko.observable(),
             vehicleTypeOptions: IMS.staticData.carTypes,
-            provincesOptions: IMS.staticData.provinceAbbreviation,
-            //the next step click action
-            nextStepToAddDeliverOrderPage: function () {
-                if (self.validation()) {
-                    $.mobile.changePage("#theSecondStepView");
-                }
-                else {
-                    $("#validationMsg").popup();
-                    $("#validationMsg").popup('open');
-                }
+            provincesOptions: IMS.staticData.provinceAbbreviation
+        };
+        //the next step click action
+        self.nextStepToAddDeliverOrderPage = function () {
+            if (self.validation()) {
+                $.mobile.changePage("#theSecondStepView");
             }
-
+            else {
+                $("#validationMsg").popup();
+                $("#validationMsg").popup('open');
+            }
         };
 
         self.validation = function () {
@@ -54,10 +60,9 @@
             return self.carInformation.vehicleAbbrev() + self.carInformation.vehicleLicenseNumber();
         }, self.carInformation);
 
-
         self.deliveryOrderInformation = {
             validationMsgOfDelivery: ko.observable(''),
-            vendorCode: ko.observable(),
+            vendorCode: ko.observable(getVendorCode()),
             deliveryNoteIdToAdd: ko.observable(),
             deliveryNoteId: ko.observableArray([])
         };
@@ -136,8 +141,15 @@
         self.pETime = ko.observable(getCurrentformatedTimeString());
         self.pLTime = ko.observable(getCurrentformatedTimeString());
 
-        var pETime = self.pDate() + " " + self.pETime() + ":00";
-        var pLTime = self.pDate() + " " + self.pLTime() + ":00";
+
+        self.pETimeC = ko.computed(function () {
+            return self.pDate() + " " + self.pETime() + ":00";;
+        }, self);
+
+        self.pLTimeC = ko.computed(function () {
+            return self.pDate() + " " + self.pLTime() + ":00";;
+        }, self);
+
         self.sucessfullAppointmentId = ko.observable();
         self.submit = function () {
             var option = {
@@ -148,8 +160,8 @@
                 vehicleType: encodeURI(self.carInformation.vehicleType()),
                 vehicleLicense: encodeURI(self.carInformation.vehicleLicense()),
                 pDate: getCurrentformatedDateString(false),
-                pETime: pETime,
-                pLTime: pLTime,
+                pETime: self.pETimeC(),
+                pLTime: self.pLTimeC(),
                 deliveryNoteId: self.deliveryOrderInformation.deliveryNoteId()
             };
             IMS.datacontext.appointment.createNewAppointment(option).then(function (result) {

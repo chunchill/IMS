@@ -44,7 +44,6 @@
             </p>
         </div><!-- /content -->
     </div>
-
     <!-- ### A page that renders the myReservationViewModel -->
     <div data-role="page" id="myReservationView">
         <div data-role="content" data-bind="template:{name:'myReservation'}">
@@ -93,7 +92,6 @@
         <!-- /content -->
     </div>
     <!-- /page myReservationViewModel -->
-
     <div data-role="page" id="reservationDetailView">
         <div data-role="content">
             <p align="center"><a href="#"><img class="popphoto" src="images/clock.png" height="80px"></a></p>
@@ -177,7 +175,29 @@
         </div><!-- /content -->
     </div>
 
-
+    <div data-role="page" id="resultView">
+        <div data-role="content">
+            <p align="center"><a href="#"><img class="popphoto" src="images/calenda.png" height="60px"></a></p>
+            <p align="center">
+                <font size="1" color="gray">道口预约</font><br>
+                <b>执行预约</b>
+            </p>
+        </div>
+        <div style="padding:10px 20px;">
+            <p align="center">
+                <a href="#"><img class="popphoto" src="images/done.png" height="50px"></a><br>
+                <a href="#" data-role="button" class="ui-icon-nodisc" data-iconshadow="false" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">Check</a><br>
+                <font size="1" color="green">执行成功</font><br><br>
+                <font size="4" color="green"><b>预约号: <span data-bind="text:sucessfullAppointmentId"></span></b></font>
+            </p>
+        </div>
+        <div data-role="content">
+            <p align="center">
+                <a href="itms_dock_editappmain_cn.html" rel="external"><img class="popphoto" src="images/footico.png" height="30px"></a><br>
+                <font size="1" color="orange">i</font><font size="1" color="#66B3FF">SCM</font><font size="1">: iTMS</font>
+            </p>
+        </div><!-- /content -->
+    </div><!-- /page -->
 
 
 </body>
