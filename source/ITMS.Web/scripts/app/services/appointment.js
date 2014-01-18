@@ -16,6 +16,13 @@ IMS.datacontext.appointment = (function ($, amplify) {
             type: 'GET'
         });
 
+        //getAllShortParkingAppointmentsForBoard by getAppBriefListS
+        amplify.request.define('getAllShortParkingAppointmentsForBoard', 'ajax', {
+            url: serverUrl + '/application/getAppBriefListS.jsonp?status=1',
+            dataType: 'jsonp',
+            type: 'GET'
+        });
+
 
         //getAllAppointments by getAppBriefListSA
         amplify.request.define('getAllAppointments', 'ajax', {
@@ -139,6 +146,10 @@ IMS.datacontext.appointment = (function ($, amplify) {
         return defferedRequest('getAllShortParkingAppointments', option)
     };
 
+    getAllShortParkingAppointmentsForBoard = function (option) {
+        return defferedRequest('getAllShortParkingAppointmentsForBoard', option)
+    };
+
     getNotStartedAppointments = function (option) {
         return defferedRequest('getNotStartedAppointments', option)
     };
@@ -198,6 +209,7 @@ IMS.datacontext.appointment = (function ($, amplify) {
         getAllAppointments: getAllAppointments,
         getAppointmentByMobile: getAppointmentByMobile,
         getAllShortParkingAppointments: getAllShortParkingAppointments,
+        getAllShortParkingAppointmentsForBoard: getAllShortParkingAppointmentsForBoard,
         getNotStartedAppointments: getNotStartedAppointments,
         getOnWayAppointments: getOnWayAppointments,
         getAlreadyArrivedAppointments: getAlreadyArrivedAppointments,

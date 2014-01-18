@@ -112,7 +112,7 @@
 
                 <div data-role="popup" id="popqrcode" data-overlay-theme="a" data-theme="d" data-corners="false">
                     <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-                    <img src="http://chart.apis.google.com/chart?cht=qr&chs=320x320&chl=20131115AB01&choe=UTF-8&chld=L">
+                    <img data-bind="attr:{src:crCode}">
                 </div>
                 <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true">
                     <legend>基本信息</legend>

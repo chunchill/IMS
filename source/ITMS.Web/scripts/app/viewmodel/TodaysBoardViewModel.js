@@ -90,7 +90,7 @@
             });
 
             //bind the short parking appointment lists
-            IMS.datacontext.appointment.getAllShortParkingAppointments().then(function (result) {
+            IMS.datacontext.appointment.getAllShortParkingAppointmentsForBoard().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
                     self.allShortParkingAppointmentBriefItems(result)
                 }

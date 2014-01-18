@@ -98,6 +98,11 @@
         self.init = function () {
             IMS.datacontext.appointment.getOnWayAppointments().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    })
                     addStatus(result, 1);
                     var list = convertToObservable(result);
                     self.onWayItems(list);
@@ -106,6 +111,11 @@
 
             IMS.datacontext.appointment.getAlreadyArrivedAppointments().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    })
                     addStatus(result, 2);
                     var list = convertToObservable(result);
                     self.alreadyArrivedItems(list);
@@ -114,6 +124,11 @@
 
             IMS.datacontext.appointment.getAlreadyEntryAppointments().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    })
                     addStatus(result, 3);
                     var list = convertToObservable(result);
                     self.alreadyEntryItems(list);

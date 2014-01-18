@@ -4,6 +4,12 @@
     IMS.ReservationDetailViewModel = function () {
         var self = this;
         self.applicationId = ko.observable();
+        self.crCode = ko.computed(function () {
+            var codeLink = 'http://chart.apis.google.com/chart?cht=qr&chs=320x320&chl=' + this.applicationId() + '&choe=UTF-8&chld=L';
+            return codeLink;
+        }, self);
+
+
         self.applicationStatus = ko.observable();
         self.deliveryOrders = ko.observableArray();
         self.isPlanedOrNot = ko.observable(false);
