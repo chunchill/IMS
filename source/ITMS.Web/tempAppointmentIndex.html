@@ -37,7 +37,7 @@
                 <p align="center"><font size="5" color="gray"><b>仅需2步完成创建</b></font></p>
                 <div class="ui-icon-nodisc">
                     <p align="center">
-                        <a href="#theFirstStepView" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="b" data-iconshadow="false" data-inline="true">Go</a>
+                        <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="b" data-iconshadow="false" data-inline="true" data-bind="click:go">Go</a>
                     </p>
                 </div>
             </div>
@@ -152,7 +152,7 @@
                 <h1>错误信息</h1>
             </div>
             <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-                <p>对不起，您的操作出错了，请重试！</p>
+                <p><span data-bind="text:errMsg"></span></p>
                 <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">确定</a>
             </div>
         </div>
@@ -190,7 +190,7 @@
             </fieldset>
             <p align="center">
                 <a href="#" data-role="button" data-inline="true" data-icon="back" data-theme="d" data-bind="click:goBackToDeliveryOrderInformation">返回</a>
-                <a href="#" data-role="button" data-inline="true" data-icon="check" data-theme="b" data-bind="click:submit">提交</a>
+                <a href="#" data-role="button" data-inline="true" data-icon="check" data-theme="b" data-bind="click:submit,disable:disableSubmit">提交</a>
             </p>
         </div>
         <div data-role="content">

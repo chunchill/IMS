@@ -25,8 +25,8 @@
         };
         self.sucessfullAppointmentId = ko.observable();
         self.init = function (orderItem) {
-            //var option = { appId: orderItem.applicationId, key: IMS.util.getUserInfo().key };
-            var option = { appId: orderItem.applicationId, key: 'key0001' };
+            var option = { appId: orderItem.applicationId, key: IMS.util.getUserInfo().key };
+            //var option = { appId: orderItem.applicationId, key: 'key0001' };
 
             //bind the appointment header
             IMS.datacontext.appointment.getAppointmentHead(option).then(function (result) {
@@ -48,14 +48,21 @@
                 }
             });
         };
+        self.disableSubmit = ko.observable(false);
+        self.submit = function () {
+            $('#popupconfirm').popup();
+            $('#popupconfirm').popup('open');
+        };
         self.excuteAppointment = function (data) {
-            var option = { appId: +self.applicationId(), key: 'key0001', action: 1 };
-            //var option = { appId: +self.applicationId(), key: IMS.util.getUserInfo().key, action: 1 };
+            //var option = { appId: +self.applicationId(), key: 'key0001', action: 1 };
+            var option = { appId: +self.applicationId(), key: IMS.util.getUserInfo().key, action: 1 };
             IMS.datacontext.appointment.excuteAppointment(option).then(function (result) {
+                myreservationModel.planedItems.remove(function (item) { return item.applicationId == self.applicationId; });
                 //alert(JSON.stringify(result));
+                self.disableSubmit(true);
                 $('#popupconfirm').popup('close');
                 self.sucessfullAppointmentId(option.appId);
-                $.mobile.changePage("#resultView");
+                $.mobile.changePage("#myReservationView");
             }, function (result) {
                 //alert(JSON.stringify(result))
                 $('#popupMessage').popup();

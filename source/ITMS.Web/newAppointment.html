@@ -44,7 +44,7 @@
                 <p align="center"><font size="5" color="gray"><b>仅需2步完成创建</b></font></p>
                 <div class="ui-icon-nodisc">
                     <p align="center">
-                        <a href="#theFirstStepView" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="b" data-iconshadow="false" data-inline="true">Go</a>
+                        <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="b" data-iconshadow="false" data-inline="true" data-bind="click:go">Go</a>
                     </p>
                 </div>
             </div>
@@ -64,7 +64,7 @@
             </div>
             <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
                 <p>对不起，您的操作出错了，请重试！</p>
-                <div data-bind="html: validationMsg"></div>
+                <div data-bind="html:carInformation.validationMsg"></div>
                 <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">确定</a>
             </div>
         </div>
@@ -135,7 +135,7 @@
         </div>
         <div style="padding:10px 20px;">
             <br>
-            <input id="autocompleteV" type="text" data-theme="d" placeholder="输入供应商代码..." data-bind="value:vendorCode">
+            <input id="autocompleteV" type="text" data-theme="d" disabled placeholder="输入供应商代码..." data-bind="value:vendorCode">
             <input id="autocompleteDN" type="text" data-theme="d" placeholder="输入交货单号..." data-bind="value:deliveryNoteIdToAdd">
             <p align="center">
                 <a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a>
@@ -166,7 +166,7 @@
                 <h1>错误信息</h1>
             </div>
             <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-                <p>对不起，您的操作出错了，请重试！</p>
+                <p><span data-bind="text:errMsg"></span></p>
                 <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">确定</a>
             </div>
         </div>
@@ -209,9 +209,10 @@
                 </ul>
             </fieldset>
             <p align="center">
-                <a href="#" data-role="button" data-inline="true" data-icon="back" data-theme="d" data-bind="click:goBackToDeliveryOrderInformation">返回</a>
-                <a href="#" data-role="button" data-inline="true" data-icon="check" data-theme="b" data-bind="click:submit">提交</a>
-            </p>
+                <!--<a href="#" data-role="button" data-inline="true"  data-icon="back" data-theme="d" data-bind="click:goBackToDeliveryOrderInformation">返回</a>-->
+                <!--<a href="#" data-role="button" data-inline="true" data-icon="check" data-theme="b" data-bind="click:submit,disable:disableSubmit">提交</a>-->
+                <input type="button" data-inline="true" data-theme="b" value="返回" data-bind="click:goBackToDeliveryOrderInformation">
+                <input type="button" data-inline="true" data-theme="b" value="提交" data-bind="click:submit,jQueryButtonDisable:disableSubmit">
         </div>
         <div data-role="content">
             <p align="center">

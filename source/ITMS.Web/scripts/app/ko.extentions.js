@@ -30,4 +30,17 @@ ko.bindingHandlers.jqmRefreshList = {
     }
 };
 
+ko.bindingHandlers.jQueryButtonDisable = {
+    update: function (element, valueAccessor) {
+        //first call the real enable binding
+        ko.bindingHandlers.disable.update(element, valueAccessor);
+
+        //do our extra processing
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        $(element).button();
+        $(element).button(value ? "disable" : "enable");
+    }
+};
+
+
 infuser.defaults.templateUrl = "templates";

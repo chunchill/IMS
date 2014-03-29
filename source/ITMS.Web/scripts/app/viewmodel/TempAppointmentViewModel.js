@@ -26,6 +26,11 @@
 
         };
 
+        self.go = function () {
+            self.disableSubmit(false);
+            $.mobile.changePage("#theFirstStepView");
+        };
+
         self.validation = function () {
             var message = '';
             var result = true;
@@ -110,6 +115,7 @@
 
         self.nextStepToSubmitPage = function () {
             if (finalValidation())
+                self.disableSubmit(false);
                 $.mobile.changePage("#theThirdStepView");
         };
 
@@ -126,6 +132,8 @@
             return moment(date).format("YYYY-MM-DD");
         }
         self.sucessfullAppointmentId = ko.observable();
+        self.disableSubmit = ko.observable(true);
+        self.errMsg = ko.observable('对不起，您的操作出错了，请重试！');
         self.submit = function () {
             var option = {
                 key: IMS.util.getUserInfo().key,
@@ -139,12 +147,20 @@
                 pLTime: getCurrentformatedDateString(true),
                 deliveryNoteId: self.deliveryOrderInformation.deliveryNoteId()
             };
+            if (self.disableSubmit()) {
+                self.errMsg('请勿重复提交');
+                $("#popupMessage").popup();
+                $("#popupMessage").popup("open");
+            }
             IMS.datacontext.appointment.createNewAppointment(option).then(function (result) {
                 if (result.errorMessage !== '' && result.errorMessage !== undefined) {
+                   
                     $.mobile.changePage("#resultView");
                     self.sucessfullAppointmentId(result.errorMessage);
+                    self.disableSubmit(true);
                 }
             }, function () {
+                self.errMsg('对不起，您的操作出错了，请重试！');
                 $("#popupMessage").popup();
                 $("#popupMessage").popup("open");
             });

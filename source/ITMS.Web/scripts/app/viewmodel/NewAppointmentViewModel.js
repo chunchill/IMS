@@ -22,6 +22,11 @@
             vehicleTypeOptions: IMS.staticData.carTypes,
             provincesOptions: IMS.staticData.provinceAbbreviation
         };
+        self.go = function () {
+            self.disableSubmit(false);
+            $.mobile.changePage("#theFirstStepView");
+        };
+
         //the next step click action
         self.nextStepToAddDeliverOrderPage = function () {
             if (self.validation()) {
@@ -116,7 +121,7 @@
 
         self.nextStepToSubmitPage = function () {
             if (finalValidation())
-                $.mobile.changePage("#theThirdStepView");
+            $.mobile.changePage("#theThirdStepView");
         };
 
         self.goBackToDeliveryOrderInformation = function () {
@@ -151,6 +156,8 @@
         }, self);
 
         self.sucessfullAppointmentId = ko.observable();
+        self.disableSubmit = ko.observable(true);
+        self.errMsg = ko.observable('对不起，您的操作出错了，请重试！');
         self.submit = function () {
             var option = {
                 key: IMS.util.getUserInfo().key,
@@ -164,15 +171,25 @@
                 pLTime: self.pLTimeC(),
                 deliveryNoteId: self.deliveryOrderInformation.deliveryNoteId()
             };
+            if (self.disableSubmit()) {
+                self.errMsg('请勿重复提交');
+                $("#popupMessage").popup();
+                $("#popupMessage").popup("open");
+            }
+            $.mobile.changePage("#resultView");
             IMS.datacontext.appointment.createNewAppointment(option).then(function (result) {
                 if (result.errorMessage !== '') {
                     $.mobile.changePage("#resultView");
                     self.sucessfullAppointmentId(result.errorMessage);
+                    self.disableSubmit(true);
                 }
             }, function () {
+                self.errMsg('对不起，您的操作出错了，请重试！');
                 $("#popupMessage").popup();
                 $("#popupMessage").popup("open");
             });
+
+
         };
 
 

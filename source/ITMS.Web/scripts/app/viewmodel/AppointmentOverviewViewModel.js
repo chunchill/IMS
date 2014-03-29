@@ -46,6 +46,11 @@
 
                         }
                     });
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    });
                     self.todaysAppointmentList(result);
                 }
             });
@@ -53,6 +58,11 @@
             //bind not Started AppointmentList
             IMS.datacontext.appointment.getNotStartedAppointments().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    });
                     self.notStartedAppointmentList(result);
                 }
             });
@@ -60,6 +70,11 @@
             //bind OnWay Appointments
             IMS.datacontext.appointment.getOnWayAppointments().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    });
                     self.onWayAppointmentList(result);
                 }
             });
@@ -67,6 +82,11 @@
             //bind Already Arrived Appointments
             IMS.datacontext.appointment.getAlreadyArrivedAppointments().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    });
                     self.alreadyArrivedList(result);
                 }
             });
@@ -74,6 +94,11 @@
             //bind Working Appointments
             IMS.datacontext.appointment.getWorkingAppointments().then(function (result) {
                 if (result.errorMessage !== 'NO_DATA') {
+                    ko.utils.arrayForEach(result, function (item) {
+                        item.driverName = decodeURI(item.driverName);
+                        item.vehicleType = decodeURI(item.vehicleType);
+                        item.vehicleLicense = decodeURI(item.vehicleLicense);
+                    });
                     self.workingList(result);
                 }
             });

@@ -9,6 +9,7 @@
         self.submit = function () {
             var mobile = self.mobileNumber();
             myreservationModel.init(mobile);
+            reservationDetailModel.disableSubmit(false);
             $.mobile.changePage("#myReservationView");
         };
     }

@@ -15,6 +15,7 @@
     <script src="scripts/lib/knockout-2.2.0.js"></script>
     <script src="scripts/lib/knockout.mapping-latest.js"></script>
     <script src="scripts/lib/koExternalTemplateEngine_all.js"></script>
+    <script src="scripts/app/util.js"></script>
     <script src="scripts/app/services/appointment.js"></script>
     <script src="scripts/app/viewmodel/InputMobilePageViewModel.js"></script>
     <script src="scripts/app/viewmodel/MyReservationViewModel.js"></script>
@@ -140,7 +141,8 @@
                 </div>
 
                 <p align="center" data-bind="visible:isPlanedOrNot">
-                    <a href="#popupconfirm" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="check" data-theme="b">开始执行</a>
+                    <!--<a href="#popupconfirm" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="check" data-theme="b">开始执行</a>-->
+                    <input type="button" data-inline="true" data-theme="b" value="开始执行" data-bind="click:submit,jQueryButtonDisable:disableSubmit">
                 </p>
             </div>
 
