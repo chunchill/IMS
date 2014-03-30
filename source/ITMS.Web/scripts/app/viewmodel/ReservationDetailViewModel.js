@@ -54,17 +54,14 @@
             $('#popupconfirm').popup('open');
         };
         self.excuteAppointment = function (data) {
-            //var option = { appId: +self.applicationId(), key: 'key0001', action: 1 };
             var option = { appId: +self.applicationId(), key: IMS.util.getUserInfo().key, action: 1 };
             IMS.datacontext.appointment.excuteAppointment(option).then(function (result) {
-                myreservationModel.planedItems.remove(function (item) { return item.applicationId == self.applicationId; });
-                //alert(JSON.stringify(result));
+                myreservationModel.planedItems.remove(function (item) { return item.applicationId == self.applicationId(); });
                 self.disableSubmit(true);
                 $('#popupconfirm').popup('close');
                 self.sucessfullAppointmentId(option.appId);
                 $.mobile.changePage("#myReservationView");
             }, function (result) {
-                //alert(JSON.stringify(result))
                 $('#popupMessage').popup();
                 $('#popupMessage').popup('close');
                 

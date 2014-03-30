@@ -14,6 +14,7 @@
 
         //--public functions
         self.itemClicked = function (orderItem) {
+            reservationDetailModel.disableSubmit(false);
             reservationDetailModel.init(orderItem);
             $.mobile.changePage("#reservationDetailView");
         };
