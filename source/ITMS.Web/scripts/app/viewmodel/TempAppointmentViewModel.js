@@ -136,7 +136,7 @@
         self.errMsg = ko.observable('对不起，您的操作出错了，请重试！');
         self.submit = function () {
             var option = {
-                key: IMS.util.getUserInfo().key,
+                key: 'key0001',
                 driver: encodeURI(self.carInformation.driver()),
                 mobile: self.carInformation.mobile(),
                 vendorCode: self.deliveryOrderInformation.vendorCode(),
