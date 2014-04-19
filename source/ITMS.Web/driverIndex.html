@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,181 +27,242 @@
 
     <link rel="shortcut icon" href="favicon.ico">
 </head>
+
 <body>
-    <div data-role="page" id="driverInputMobileView" data-theme="b">
+    <div data-role="page" id="driverInputMobileView" data-theme="c">
         <div data-role="content">
-            <p align="center"><a href="#"><img class="popphoto" src="images/clock.png" height="80px"></a></p>
             <p align="center">
-                <font size="1"  color="gray">道口预约</font><br>
-                <font size="1"><b>我的预约任务</b></font>
-            </p><br>
-            <p align="center"><input type="tel" data-clear-btn="false" name="tel-1" id="tel-1" data-bind="value:mobileNumber" placeholder="请输入手机号"></p>
-            <p align="center"><a href="#" data-bind="click:submit" data-transition="pop" data-role="button" data-icon="check" data-iconpos="left" data-inline="true" data-theme="d">提交</a></p>
+                <a href="#">
+                    <img class="popphoto" src="images/clock.png" height="80px">
+                </a>
+            </p>
+            <p align="center">
+                <font size="3" color="gray">道口预约</font>
+                <br>
+                <font size="2">我的预约任务</font>
+            </p>
+            <p align="center">
+                <input type="tel" data-theme="d" data-clear-btn="false" name="tel-1" id="tel-1" data-bind="value:mobileNumber" placeholder="请输入手机号">
+            </p>
+            <br>
+            <p align="center">
+                <a href="#" data-bind="click:submit" data-transition="pop" data-role="button" data-icon="check" data-iconpos="left" data-inline="true" data-theme="d">登录</a>
+            </p>
         </div>
 
         <div data-role="content">
             <p align="center">
-                <a href="#"><img class="popphoto" src="images/footico.png" height="30px"></a><br>
-                <font size="1" font color="orange">i</font><font size="1" font color="#66B3FF">SCM</font><font size="1">: iTMS</font>
+                <a href="#" rel="external">
+                    <img class="popphoto" src="images/banner.png" height="20px">
+                </a>
             </p>
-        </div><!-- /content -->
+        </div>
+        <!-- /content -->
     </div>
     <!-- ### A page that renders the myReservationViewModel -->
     <div data-role="page" id="myReservationView">
-        <div data-role="content" data-bind="template:{name:'myReservation'}">
+        <!--  <div data-role="content" data-bind="template:{name:'myReservation'}">
+        </div>-->
+        <p align="center">
+            <a href="#">
+                <img class="popphoto" src="images/clock.png" height="80px">
+            </a>
+        </p>
+        <p align="center">
+            <font size="3" color="gray">道口预约</font>
+            <br>
+            <font size="2">我的预约任务</font>
+        </p>
+        <br>
+        <div data-role="collapsible" data-theme="e" data-content-theme="d" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="padding:10px 10px;">
+            <h2>已计划:
+                <font color="gray">
+                    <span data-bind="text:planedItems().length"></span>
+                </font>
+            </h2>
+            <ul data-role="listview" data-inset="true" data-count-theme="e" data-filter="true" data-mini="ture" data-bind="jqmTemplate: {name:'orderHeader', foreach:planedItems},jqmRefreshList:planedItems"></ul>
+        </div>
+        <div data-role="collapsible" data-theme="b" data-content-theme="d" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="padding:10px 10px;">
+            <h2>执行中:
+                <font color="white">
+                    <span data-bind="text:unPlanedItems().length"></span>
+                </font>
+            </h2>
+            <ul data-role="listview" data-inset="true" data-count-theme="b" data-filter="true" data-mini="ture" data-bind="jqmTemplate: {name:'orderHeader', foreach:unPlanedItems},jqmRefreshList:unPlanedItems "></ul>
         </div>
         <script type="text/html" id="orderHeader">
-            <li>  
-                <a href="#" data-bind="click:$parent.itemClicked"> 
-                    <p><font size="3"><strong data-bind="text:applicationId"></strong></font></p>
-                    <p>车牌: <span data-bind="text:vehicleLicense"></span></p>
-                    <p>手机:<span data-bind="text:mobile"></span></p>
-                    <p>货量:<span data-bind="text:deliveryVolSum"></span></p>
-                    <p>计划日期:<span data-bind="text:planedDevelieryDate"></span></p>
-                    <p>计划时间段:<span data-bind="text:planedEarliestDevelieryDate"></span>-<span data-bind="text:planedLatestDevelieryDate"></span></p>
-                    <p>道口:<span data-bind="text:dock"></span></p>
-                    <span class="ui-li-count"><span data-bind="text:deliveryCount"></span></span>
-                    <input type="hidden" data-bind="value:status" />
-                </a>
-            </li>
+            < li > < a href = "#"
+            data - bind = "click:$parent.itemClicked" > < p > < font size = "3" > < strong data - bind = "text:applicationId" > < /strong></font > < /p>
+                    <p>车牌: <span data-bind="text:vehicleLicense"></span > < /p>
+                    <p>手机:<span data-bind="text:mobile"></span > < /p>
+                    <p>货量:<span data-bind="text:deliveryVolSum"></span > < /p>
+                    <p>计划日期:<span data-bind="text:planedDevelieryDate"></span > < /p>
+                    <p>计划时间段:<span data-bind="text:planedEarliestDevelieryDate"></span > - < span data - bind = "text:planedLatestDevelieryDate" > < /span></p > < p > 道口: < span data - bind = "text:dock" > < /span></p > < span class = "ui-li-count" > < span data - bind = "text:deliveryCount" > < /span></span > < input type = "hidden"
+            data - bind = "value:status" / > < /a>
+            </li >
         </script>
-        <!-- /content -->
+
+
         <div data-role="content">
-            <p align="center"> <a href="#defaultpanel" data-rel="popup" class="ui-icon-alt" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">go</a></p>
-        </div>
-        <!-- /content -->
-        <!-- defaultpanel  -->
-        <div data-role="panel" id="defaultpanel" data-theme="d" data-display="overlay" data-position="right">
-            <div class="panel-content">
-                <p align="center">我的<font color="orange"><b>iTMS</b></font> <br /><font size="1" font="" color="gray">道口预约</font></p>
-                <ul data-role="listview" data-inset="true" class="ui-icon-alt">
-                    <li data-icon="plus"><a href="itms_dock_newapp_cn.html" rel="external">创建预约</a></li>
-                    <li data-icon="edit"><a href="#">编辑预约</a></li>
-                    <li data-icon="check"><a href="itms_dock_excapp_cn.html" rel="external">执行预约</a></li>
-                    <li data-icon="search"><a href="itms_dock_myapp_cn.html" rel="external">我的预约</a></li>
-                    <li data-icon="star"><a href="#">我的档案</a></li>
-                </ul>
-                <br />
-                <br />
-                <p align="center"><a href="#" data-rel="close" class="ui-icon-nodisc" data-role="button" data-icon="grid" data-iconshadow="false" data-iconpos="notext" data-theme="a">Close</a></p>
-            </div>
-            <!-- /content wrapper for padding -->
-        </div>
-        <!-- /defaultpanel -->
-        <div data-role="content">
-            <p align="center"><a href="#"><img class="popphoto" src="images/footico.png" height="30px" /></a><br /> <font size="1" font="" color="orange">i</font><font size="1" font="" color="#66B3FF">SCM</font><font size="1">: iTMS</font></p>
+            <p align="center">
+                <a href="#" rel="external">
+                    <img class="popphoto" src="images/banner.png" height="20px">
+                </a>
+            </p>
         </div>
         <!-- /content -->
     </div>
     <!-- /page myReservationViewModel -->
     <div data-role="page" id="reservationDetailView">
         <div data-role="content">
-            <p align="center"><a href="#"><img class="popphoto" src="images/clock.png" height="80px"></a></p>
             <p align="center">
-                <font size="1"  color="gray">道口预约</font><br>
-                <font><b>我的预约任务</b></font>
+                <a href="#">
+                    <img class="popphoto" src="images/clock.png" height="80px">
+                </a>
+            </p>
+            <p align="center">
+                <font size="3" color="gray">道口预约</font>
+                <br>
+                <font size="2">我的预约任务</font>
             </p>
         </div>
-      
-            <div style="padding:10px 10px;">
-                <p align="center">
-                    <a href="#popqrcode" data-rel="popup" data-position-to="window" data-transition="fade">
-                     <font size="4" color="gray"><strong data-bind="text:applicationId"></strong></font>
-                    </a>
-                </p>
 
-                <div data-role="popup" id="popqrcode" data-overlay-theme="a" data-theme="d" data-corners="false">
-                    <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-                    <img data-bind="attr:{src:crCode}">
+        <div style="padding:10px 10px;">
+            <p align="center">
+                <a href="#popqrcode" data-rel="popup" data-position-to="window" data-transition="fade">
+                    <font size="4" color="gray">
+                        <strong data-bind="text:applicationId"></strong>
+                    </font>
+                </a>
+            </p>
+
+            <div data-role="popup" id="popqrcode" data-overlay-theme="a" data-theme="d" data-corners="false">
+                <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                <img data-bind="attr:{src:crCode}">
+            </div>
+            <fieldset data-role="collapsible" data-theme="c" data-content-theme="d" data-mini="true" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+                <legend>基本信息</legend>
+                <div data-role="fieldcontain" data-bind="with:basicInformation">
+                    <label for="txdr">供应商:</label>
+                    <input type="text" name="txdr" id="txdr" data-bind="value:vendorCode" disabled="disabled" data-mini="true" />
+                    <label for="txdr">司机:</label>
+                    <input type="text" name="txdr" id="txdr" data-bind="value:driverName" disabled="disabled" data-mini="true" />
+                    <label for="txmb">手机:</label>
+                    <input type="text" name="txmb" id="txmb" data-bind="value:mobileNo" disabled="disabled" data-mini="true" />
+                    <label for="txlc">车牌号:</label>
+                    <input type="text" name="txlc" id="txlc" data-bind="value:vehicleLicenseNo" disabled="disabled" data-mini="true" />
+                    <label for="txlc">车辆类型:</label>
+                    <input type="text" name="txvt" id="txvt" data-bind="value:vehicleType" disabled="disabled" data-mini="true" />
+                    <label for="dt">到达日期:</label>
+                    <input type="date" name="dt" id="dt" data-bind="value:planedDevelieryDate" placeholder="Date" disabled="disabled" data-mini="true" />
+                    <label for="te">最早时间:</label>
+                    <input type="time" name="te" id="te" data-bind="value:planedEarliestDevelieryDate" placeholder="Time" disabled="disabled" data-mini="true" />
+                    <label for="te">最晚时间:</label>
+                    <input type="time" name="te" id="te" data-bind="value:planedLatestDevelieryDate" placeholder="Time" disabled="disabled" data-mini="true" />
                 </div>
-                <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true">
-                    <legend>基本信息</legend>
-                    <div data-role="fieldcontain" data-bind="with:basicInformation">
-                        <label for="txdr">供应商:</label>
-                        <input type="text" name="txdr" id="txdr" data-bind="value:vendorCode" disabled="disabled" data-mini="true" />
-                        <label for="txdr">司机:</label>
-                        <input type="text" name="txdr" id="txdr" data-bind="value:driverName" disabled="disabled" data-mini="true" />
-                        <label for="txmb">手机:</label>
-                        <input type="text" name="txmb" id="txmb" data-bind="value:mobileNo" disabled="disabled" data-mini="true" />
-                        <label for="txlc">车牌号:</label>
-                        <input type="text" name="txlc" id="txlc" data-bind="value:vehicleLicenseNo" disabled="disabled" data-mini="true" />
-                        <label for="txlc">车辆类型:</label>
-                        <input type="text" name="txvt" id="txvt" data-bind="value:vehicleType" disabled="disabled" data-mini="true" />
-                        <label for="dt">到达日期:</label>
-                        <input type="date" name="dt" id="dt" data-bind="value:planedDevelieryDate" placeholder="Date" disabled="disabled" data-mini="true" />
-                        <label for="te">最早时间:</label>
-                        <input type="time" name="te" id="te" data-bind="value:planedEarliestDevelieryDate" placeholder="Time" disabled="disabled" data-mini="true" />
-                        <label for="te">最晚时间:</label>
-                        <input type="time" name="te" id="te" data-bind="value:planedLatestDevelieryDate" placeholder="Time" disabled="disabled" data-mini="true" />
-                    </div>
-                </fieldset>
+            </fieldset>
 
-                <div data-role="collapsible" data-mini="true" data-theme="d" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
-                    <h4>交货单: <font color="gray"><span data-bind="text:deliveryOrders().length"></span></font></h4>
-                    <ul data-role="listview" data-bind="jqmTemplate:{name:'deliverOrderItem',foreach:deliveryOrders},jqmRefreshList:deliveryOrders"></ul>
-                </div>
-
-                <p align="center" data-bind="visible:isPlanedOrNot">
-                    <!--<a href="#popupconfirm" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="check" data-theme="b">开始执行</a>-->
-                    <input type="button" data-inline="true" data-theme="b" value="开始执行" data-bind="click:submit,jQueryButtonDisable:disableSubmit">
-                </p>
+            <div data-role="collapsible" data-mini="true" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+                <h4>交货单:
+                    <font color="gray">
+                        <span data-bind="text:deliveryOrders().length"></span>
+                    </font>
+                </h4>
+                <ul data-role="listview" data-bind="jqmTemplate:{name:'deliverOrderItem',foreach:deliveryOrders},jqmRefreshList:deliveryOrders"></ul>
             </div>
 
-            <script type="text/html" id="deliverOrderItem">
-                <li data-icon="check"><a href="#"><span data-bind="text:deliveryNoteId"></span></a></li>
-            </script>
-       
+            <p align="center" data-bind="visible:isPlanedOrNot">
+                <!--<a href="#popupconfirm" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="check" data-theme="b">开始执行</a>-->
+                <input type="button" data-inline="true" data-theme="d" data-icon="check" value="开始执行" data-bind="click:submit,jQueryButtonDisable:disableSubmit">
+            </p>
+        </div>
+
+        <script type="text/html" id="deliverOrderItem">
+            < li data - icon = "check" > < a href = "#" > < span data - bind = "text:deliveryNoteId" > < /span></a > < /li>
+        </script>
+
 
         <div data-role="popup" id="popupconfirm" data-theme="c" class="ui-corner-all" data-overlay-theme="a">
-                <div style="padding:10px 20px;">
-                    <p align="center"><strong data-bind="text:applicationId"></strong></p>
-                    <p align="center"><b><font color="red">开始执行预约任务</b></font></p>
-                    <a href="#" id="btnCancelExcute" data-role="button" data-inline="true" data-icon="delete" data-theme="c" data-mini="true">取消</a>
-                    <a href="#" id="btnConfirmExcute" data-role="button" data-bind="click:excuteAppointment" data-inline="true" data-icon="check" data-theme="b" data-mini="true">确认</a>
-                </div>
+            <div style="padding:10px 20px;">
+                <p align="center">
+                    <strong data-bind="text:applicationId"></strong>
+                </p>
+                <p align="center">
+                    <b>
+                        <font color="gray">开始执行预约任务</b>
+                    </font>
+                </p>
+                <a href="#" id="btnCancelExcute" data-role="button" data-inline="true" data-icon="delete" data-theme="c">取消</a>
+                <a href="#" id="btnConfirmExcute" data-role="button" data-bind="click:excuteAppointment" data-inline="true" data-icon="check" data-theme="b">确认</a>
+            </div>
         </div>
-        <div data-role="popup" id="popupMessage" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
-            <div data-role="header" data-theme="a" class="ui-corner-top">
+        <div data-role="popup" id="popupMessage" data-overlay-theme="a" data-theme="d" style="max-width:400px;" class="ui-corner-all">
+            <div data-role="header" data-theme="c" class="ui-corner-top">
                 <h1>错误信息</h1>
             </div>
             <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-                <p>对不起，您的操作出错了，请重试！</p>
-                <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">确定</a>
+                <p align="center">
+                    <a href="#">
+                        <img class="popphoto" src="images/warning.png" height="42px">
+                    </a>
+                </p>
+                <p align="center">
+                    <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="d" data-icon="check">确定</a>
+                </p>
             </div>
         </div>
 
         <div data-role="content">
             <p align="center">
-                <a href="#page1"><img class="popphoto" src="http://www.flaticon.com/png/256/247.png" height="30px"></a><br>
-                <font size="1" font color="orange">i</font><font size="1" font color="#66B3FF">SCM</font><font size="1">: iTMS</font>
+                <a href="#" rel="external">
+                    <img class="popphoto" src="images/banner.png" height="20px">
+                </a>
             </p>
-        </div><!-- /content -->
+        </div>
+        <!-- /content -->
     </div>
 
     <div data-role="page" id="resultView">
         <div data-role="content">
-            <p align="center"><a href="#"><img class="popphoto" src="images/calenda.png" height="60px"></a></p>
             <p align="center">
-                <font size="1" color="gray">道口预约</font><br>
-                <b>执行预约</b>
+                <a href="#">
+                    <img class="popphoto" src="images/calenda.png" height="60px">
+                </a>
+            </p>
+            <p align="center">
+                <font size="3" color="gray">道口预约</font>
+                <br>
+                <font size="2">我的预约任务</font>
             </p>
         </div>
         <div style="padding:10px 20px;">
             <p align="center">
-                <a href="#"><img class="popphoto" src="images/done.png" height="50px"></a><br>
-                <a href="#" data-role="button" class="ui-icon-nodisc" data-iconshadow="false" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">Check</a><br>
-                <font size="1" color="green">执行成功</font><br><br>
-                <font size="4" color="green"><b>预约号: <span data-bind="text:sucessfullAppointmentId"></span></b></font>
+                <a href="#">
+                    <img class="popphoto" src="images/done.png" height="50px">
+                </a>
+                <br>
+                <a href="#" data-role="button" class="ui-icon-nodisc" data-iconshadow="false" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">Check</a>
+                <br>
+                <font size="1" color="green">执行成功</font>
+                <br>
+                <br>
+                <font size="4" color="green">
+                    <b>预约号:
+                        <span data-bind="text:sucessfullAppointmentId"></span>
+                    </b>
+                </font>
             </p>
         </div>
         <div data-role="content">
             <p align="center">
-                <a href="itms_dock_editappmain_cn.html" rel="external"><img class="popphoto" src="images/footico.png" height="30px"></a><br>
-                <font size="1" color="orange">i</font><font size="1" color="#66B3FF">SCM</font><font size="1">: iTMS</font>
+                <a href="#" rel="external">
+                    <img class="popphoto" src="images/banner.png" height="20px">
+                </a>
             </p>
-        </div><!-- /content -->
-    </div><!-- /page -->
-
-
+        </div>
+        <!-- /content -->
+    </div>
+    <!-- /page -->
 </body>
+
 </html>
