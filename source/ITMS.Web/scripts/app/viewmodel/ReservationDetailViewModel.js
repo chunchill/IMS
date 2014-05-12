@@ -25,8 +25,8 @@
         };
         self.sucessfullAppointmentId = ko.observable();
         self.init = function (orderItem) {
-            var option = { appId: orderItem.applicationId, key: IMS.util.getUserInfo().key };
-            //var option = { appId: orderItem.applicationId, key: 'key0001' };
+            //var option = { appId: orderItem.applicationId, key: IMS.util.getUserInfo().key };
+            var option = { appId: orderItem.applicationId, key: 'key0001' };
 
             //bind the appointment header
             IMS.datacontext.appointment.getAppointmentHead(option).then(function (result) {
