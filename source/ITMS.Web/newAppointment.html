@@ -16,6 +16,7 @@
     <script src="scripts/lib/knockout.mapping-latest.js"></script>
     <script src="scripts/lib/koExternalTemplateEngine_all.js"></script>
     <script src="scripts/lib/moment.min.js"></script>
+    <script src="scripts/lib/cordova.android.js"></script>
     <script src="scripts/app/staticdata.js"></script>
     <script src="scripts/app/util.js"></script>
     <script src="scripts/app/services/appointment.js"></script>
@@ -138,7 +139,7 @@
             <input id="autocompleteV" type="text" data-theme="d" disabled placeholder="输入供应商代码..." data-bind="value:vendorCode">
             <input id="autocompleteDN" type="text" data-theme="d" placeholder="输入交货单号..." data-bind="value:deliveryNoteIdToAdd">
             <p align="center">
-                <a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Scan</a>
+                <a href="#" class="ui-icon-alt" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true" data-bind='click:scan'>Scan</a>
                 <a href="#" class="ui-icon-nodisc" data-role="button" data-icon="plus" data-iconpos="notext" data-inline="true" data-theme="e" data-iconshadow="false" data-bind="click:addOneDeliveryNoteId">Add</a>
             </p>
             <fieldset data-role="collapsible" data-theme="b" data-content-theme="c" data-mini="true" data-collapsed="false">

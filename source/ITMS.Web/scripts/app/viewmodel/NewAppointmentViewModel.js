@@ -74,6 +74,7 @@
         self.deliveryOrderInformation.deliveryNoteCount = ko.observable(0);
 
         var validationDeliveryItem = function () {
+            self.deliveryOrderInformation.deliveryNoteIdToAdd($('#autocompleteDN').val());
             var itemToAdd = self.deliveryOrderInformation.deliveryNoteIdToAdd();
             if (itemToAdd == undefined) {
                 self.deliveryOrderInformation.validationMsgOfDelivery('请输入交货单号码！')
@@ -93,6 +94,26 @@
             if (validationDeliveryItem()) {
                 self.deliveryOrderInformation.deliveryNoteId.push(self.deliveryOrderInformation.deliveryNoteIdToAdd());
                 self.deliveryOrderInformation.deliveryNoteCount(self.deliveryOrderInformation.deliveryNoteId().length);
+            }
+        };
+
+       function startScan() {
+       cordova.plugins.barcodeScanner.scan(
+            function (result) {
+                $("#autocompleteDN").val(result.text);
+            }, 
+            function (error) {
+                alert("Scanning failed: " + error);
+            }
+        );
+       }
+
+        self.deliveryOrderInformation.scan=function(){
+            try{
+                startScan();
+             }
+             catch(err){
+                 alert(err.stack||err.stacktrace);
             }
         };
 
